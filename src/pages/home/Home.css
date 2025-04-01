@@ -1,0 +1,360 @@
+.home {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #faf3e8;
+  background: url("../../assets/bg.png") no-repeat center/cover;
+  position: relative;
+}
+
+.home::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: blur(80px);
+  mix-blend-mode: color-burn;
+}
+
+.home > * {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-title {
+  font-size: 5.5rem;
+  font-family: "Montserrat Underline", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.hero-title span {
+  display: block;
+}
+
+.hero-title img {
+  width: 100px;
+}
+
+.hero-title .img-wrapper,
+.hero-card .img-wrapper {
+  position: relative;
+  width: fit-content;
+  display: inline-block; /* Adjust as needed */
+  border-radius: 8px;
+  background-color: red;
+  height: 106px;
+  display: inline-block;
+  padding: 5px 10px;
+  margin: 0 8px;
+}
+
+.hero-title .img-wrapper:first-of-type {
+  background-color: #d3e0ff;
+}
+.hero-title .img-wrapper:last-of-type img {
+  position: relative;
+  bottom: -3px;
+}
+
+.hero-title .img-wrapper:last-of-type {
+  background-color: #c8f2d2;
+  top: -8px;
+}
+
+.hero-title .img-wrapper:first-of-type {
+  bottom: -20px;
+}
+
+.hero-title .img-wrapper:first-of-type img {
+  position: relative;
+  top: -20px;
+}
+
+.hero-sub-title {
+  max-width: 800px;
+  margin: 30px auto 55px;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+.try-out {
+  background: #cddbff;
+  max-width: max-content;
+  border-radius: 35px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+  padding: 6px 8px;
+  margin-bottom: 65px;
+  font-family: sans-serif;
+  font-optical-sizing: auto;
+}
+.try-out p {
+  margin-right: 25px;
+  padding-left: 25px;
+  color: #4f617a;
+}
+
+.try-out a {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: white;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+  margin: 0;
+  cursor: pointer;
+  display: flex;
+  padding: 5px;
+}
+
+.try-out a:hover {
+  box-shadow: 0 0 6px 2px rgba(205, 219, 255, 0.8);
+}
+.try-out span {
+  font-weight: 500;
+}
+.hero-card {
+  margin-top: 5px;
+  display: flex;
+}
+
+.hero-card .left-card {
+  flex-basis: 60%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 15px;
+  background-color: white;
+  margin-left: 30px;
+  border-radius: 15px;
+  color: #181d33;
+  font-family: "Karla", sans-serif;
+}
+
+.right-card {
+  flex-basis: 30%;
+  margin: 0 auto;
+  background-color: #3773ffe2;
+  border-radius: 15px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  color: white;
+}
+.right-card .mockup {
+  width: 160px;
+  position: relative;
+  top: 20px;
+}
+.right-card a {
+  padding: 6px 8px 6px 6px;
+  border-radius: 35px;
+  background-color: white;
+  border: none;
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  text-decoration: none;
+  color: #3773ffe2;
+  font-size: 0.9rem;
+}
+.right-card .text-content img {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.right-card .text-content {
+  margin-left: 20px;
+}
+.right-card .text-content h3 {
+  font-size: 3rem;
+  font-weight: 400;
+  margin-top: 3rem;
+}
+.right-card .text-content h3 sup {
+  font-size: 1rem;
+  margin-left: 5px;
+  color: #edd686;
+}
+.right-card .text-content p {
+  font-size: 1rem;
+}
+.hero-card .content-column {
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 8px;
+  position: relative;
+}
+
+.hero-card .content-column p {
+  font-weight: 500;
+  word-spacing: 2px;
+  opacity: 0.9;
+  max-width: 80%;
+  line-height: 1.4;
+}
+
+.hero-card .img-wrapper {
+  background-color: #f6de9dd5;
+  margin-bottom: 30px;
+}
+
+.hero-card .img-wrapper img {
+  width: 93px;
+}
+
+.hero-card .left-card h3 {
+  font-weight: 350;
+  font-size: 4rem;
+  font-family: "Karla", sans-serif;
+  font-optical-sizing: auto;
+}
+
+.hero-card .content-column:nth-of-type(2)::after,
+.hero-card .content-column:nth-of-type(1)::after {
+  position: absolute;
+  content: "";
+  top: 0;
+  right: 30px;
+  height: 99%;
+  width: 1.5px;
+  background-color: #cddbff;
+}
+
+.hero-card .content-column:nth-of-type(2) p,
+.hero-card .content-column:nth-of-type(3) p {
+  font-size: 0.85rem;
+}
+
+.hero-card .buttons span {
+  display: inline-block;
+  border: 2px solid #d4e0ff;
+  padding: 5px 8px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  margin: 0 3px;
+  font-weight: 500;
+  color: #181d33;
+}
+
+.hero-card .buttons span:nth-last-of-type(even) {
+  border-color: #0650ff;
+  color: #0650ff;
+}
+
+/* Mobile responsiveness */
+@media screen and (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem;
+    margin-top: 20px;
+  }
+
+  .hero-title .img-wrapper {
+    height: 70px;
+    padding: 2px 6px;
+    margin: 4px 4px;
+  }
+  .hero-title img {
+    width: 70px;
+  }
+  .try-out {
+    margin-bottom: 40px;
+  }
+
+  .hero-sub-title {
+    font-size: 1rem;
+    margin-top: 30px;
+    padding: 0 20px;
+  }
+
+  .hero-card {
+    flex-direction: column;
+    margin-top: 10px;
+  }
+
+  .hero-card .left-card h3 {
+    font-size: 2.5rem;
+  }
+
+  .hero-card .left-card {
+    grid-template-columns: 1fr;
+    padding: 10px;
+    place-items: center;
+    text-align: center;
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .hero-card .img-wrapper {
+    margin: 10px auto 30px auto;
+  }
+  .hero-card .content-column {
+    margin-bottom: 50px;
+  }
+
+  .hero-card .content-column p {
+    font-weight: 500;
+    word-spacing: 2px;
+    opacity: 0.9;
+    margin: 0 auto 20px auto;
+  }
+
+  /* 
+
+  .hero-sub-title {
+    font-size: 1rem;
+    margin: 20px auto;
+  }
+
+
+  .try-out p {
+    margin-right: 0;
+    padding-left: 0;
+    text-align: center;
+  }
+
+  .try-out a {
+    margin: 10px 0;
+  }
+
+  .hero-card {
+    flex-direction: column;
+    margin-top: 10px;
+  }
+
+  .hero-card .left-card,
+  .hero-card .right-card {
+    flex-basis: 100%;
+    margin: 10px 0;
+  }
+
+  .hero-card .left-card {
+    grid-template-columns: 1fr;
+    padding: 10px;
+  }
+
+  .hero-card .content-column p {
+    max-width: 100%;
+    font-size: 0.9rem;
+  }
+
+  .hero-card .left-card h3 {
+    font-size: 2.5rem;
+  }
+
+  .hero-card .buttons span {
+    font-size: 0.7rem;
+    padding: 4px 6px;
+  } */
+}

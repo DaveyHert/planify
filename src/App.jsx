@@ -12,15 +12,22 @@ import SignUp from "./pages/sign-up/SignUp";
 import Home from "./pages/Home/Home";
 import SignIn from "./pages/sign-in/SignIn";
 import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
 
 function App() {
   const { authIsReady } = useAuthContext();
   const currentlocation = useLocation().pathname;
 
+  const showSidebar =
+    currentlocation !== "/" &&
+    currentlocation !== "/sign-up" &&
+    currentlocation !== "/sign-in";
+
   return (
     authIsReady && (
       <>
         <div className='App'>
+          {showSidebar && <Sidebar />}
           <div className='container'>
             {currentlocation !== "/" && <Navbar />}
             <Routes>

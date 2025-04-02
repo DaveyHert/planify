@@ -9,7 +9,7 @@ function Navbar() {
   const { logOutUser } = useLogout();
 
   return (
-    <nav className='navbar'>
+    <nav className={`navbar ${user ? "modify" : ""}`}>
       <ul>
         <li className='logo'>
           <Link to='/'>

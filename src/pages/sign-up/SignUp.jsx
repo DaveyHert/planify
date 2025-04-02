@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useSignUp } from "../../hooks/useSignUp";
 import ProgressIcon from "../../components/ProgressIcon";
+import ImageUpload from "../../assets/image-upload.svg";
 import Error from "../../components/Error";
+
 import "./SignUp.css";
 
 function SignUp() {
@@ -11,6 +13,7 @@ function SignUp() {
     email: "",
     password: "",
     displayName: "",
+    thumbnail: null,
   });
 
   const { signUpNewUser, isPending, error, response } = useSignUp();
@@ -40,6 +43,7 @@ function SignUp() {
         email: "",
         password: "",
         displayName: "",
+        avatar: null,
       });
   };
 
@@ -87,6 +91,19 @@ function SignUp() {
             type='text'
             name='displayName'
             value={formData.displayName}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Avatar:
+          <span className='avatar'>
+            <img src={ImageUpload} alt='upload image' />
+            Choose image
+          </span>
+          <input
+            type='file'
+            name='avatar'
+            value={formData.avatar}
             onChange={handleChange}
           />
         </label>

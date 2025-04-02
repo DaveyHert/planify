@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSignIn } from "../../hooks/useSignIn";
 import ProgressIcon from "../../components/ProgressIcon";
 import Error from "../../components/Error";
 
 function SignIn() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
   const [showError, setShowError] = useState(false);
   const [invalidInput, setInvalidInput] = useState("");
 
@@ -14,6 +14,9 @@ function SignIn() {
   //   handle sign in
   const handleSignIn = (e) => {
     e.preventDefault();
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
+
     if (!email || !password) {
       setInvalidInput("Email and password required!");
 
@@ -42,20 +45,12 @@ function SignIn() {
         <h2 className='page-title'>Sign In</h2>
         <label>
           Email:
-          <input
-            type='email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+          <input type='email' ref={emailRef} />
         </label>
 
         <label>
           Password:
-          <input
-            type='password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <input type='password' ref={passwordRef} />
         </label>
 
         <button className='btn' disabled={isPending}>

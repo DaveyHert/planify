@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSignUp } from "../../hooks/useSignUp";
 import ProgressIcon from "../../components/ProgressIcon";
-import ImageUpload from "../../assets/image-upload.svg";
+import AvatarIcon from "../../assets/avatar-icon.svg";
 import Error from "../../components/Error";
 
 import "./SignUp.css";
@@ -97,7 +97,7 @@ function SignUp() {
         <label>
           Avatar:
           <span className='avatar'>
-            <img src={ImageUpload} alt='upload image' />
+            <img src={AvatarIcon} alt='upload image' />
             Choose image
           </span>
           <input

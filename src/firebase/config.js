@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, Timestamp } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -17,7 +18,10 @@ const app = initializeApp(firebaseConfig);
 
 // Initialize firestore service
 const firestoreDB = getFirestore(app);
+// Initialize Authentification service
 const firebaseAuth = getAuth(app);
+// Initialize storage service
+const firebaseStorage = getStorage(app);
 const createTimeStamp = Timestamp;
 
-export { firestoreDB, firebaseAuth, createTimeStamp };
+export { firestoreDB, firebaseAuth, createTimeStamp, firebaseStorage };

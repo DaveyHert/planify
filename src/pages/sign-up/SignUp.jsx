@@ -21,8 +21,8 @@ function SignUp() {
     console.log(e);
     const imageFile = e.target.files[0];
     console.log(imageFile);
-    if (!imageFile) {
-      setInvalidInput("Please select a file");
+    if (!imageFile || !imageFile.type.includes("image")) {
+      setInvalidInput("Please select an image");
       return;
     }
 
@@ -50,12 +50,22 @@ function SignUp() {
   const handleSignUp = (e) => {
     e.preventDefault();
 
-    if (!formData.email || !formData.password || !formData.displayName) {
-      setInvalidInput("Email, password, and username required");
+    if (
+      !formData.email ||
+      !formData.password ||
+      !formData.displayName ||
+      !formData.avatar
+    ) {
+      setInvalidInput("Email, password, username and profile picture required");
       return;
     }
 
-    signUpNewUser(formData.email, formData.password, formData.displayName);
+    signUpNewUser(
+      formData.email,
+      formData.password,
+      formData.displayName,
+      formData.avatar
+    );
 
     // clear state
     if (response)

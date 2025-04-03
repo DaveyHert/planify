@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { firebaseAuth } from "../firebase/config";
+import { firebaseAuth, firebaseStorage, firestoreDB } from "../firebase/config";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useAuthContext } from "./useAuthContext";
 
 export function useSignUp() {
@@ -9,7 +10,7 @@ export function useSignUp() {
   const [response, setResponse] = useState(null);
   const { dispatch } = useAuthContext();
 
-  const signUpNewUser = async (email, password, displayName) => {
+  const signUpNewUser = async (email, password, displayName, avatar) => {
     let isMounted = true; // Prevent state updates if unmounted
     setError(null);
     setIsPending(true);
@@ -23,6 +24,14 @@ export function useSignUp() {
         password
       );
       if (!res) throw new Error("Could not complete signup");
+
+      // upload users avater/profile pics
+      const uploadPath = `thumnbnails/${res.user.uid}/${avatar.name}`;
+      const storageRef = ref(firebaseStorage, uploadPath);
+      const snapshot = await uploadBytes(storageRef, avatar);
+
+      //
+      console.log(snapshot.get());
 
       // update new user with display name
       await updateProfile(res.user, { displayName });

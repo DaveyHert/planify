@@ -9,12 +9,28 @@ import "./SignUp.css";
 function SignUp() {
   const [showError, setShowError] = useState(false);
   const [invalidInput, setInvalidInput] = useState("");
+  const [avatarPreview, setAvatarPreview] = useState(null);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     displayName: "",
-    thumbnail: null,
+    avatar: null,
   });
+
+  const handleAvatarChange = (e) => {
+    // console.log(e);
+    const imageFile = e.target.files[0];
+    if (!imageFile) return;
+
+    if (imageFile.size > 100000) {
+      setInvalidInput("Image too large, must be smaller tha 1mb");
+      return;
+    }
+
+    const imageURL = URL.createObjectURL(imageFile);
+    setAvatarPreview(imageURL);
+    setFormData((prevData) => ({ ...prevData, avatar: imageFile }));
+  };
 
   const { signUpNewUser, isPending, error, response } = useSignUp();
 
@@ -95,16 +111,21 @@ function SignUp() {
           />
         </label>
         <label>
-          Avatar:
-          <span className='avatar'>
-            <img src={AvatarIcon} alt='upload image' />
-            Choose image
-          </span>
+          Profile thumbnail:
+          <div className={`avatar-group ${avatarPreview ? "active" : ""}`}>
+            <span className='avatar'>
+              <img src={AvatarIcon} alt='upload image' />
+              Choose image
+            </span>
+            {avatarPreview && (
+              <img src={avatarPreview} className='avatar-preview' />
+            )}
+          </div>
           <input
             type='file'
             name='avatar'
-            value={formData.avatar}
-            onChange={handleChange}
+            accept='image/*'
+            onChange={handleAvatarChange}
           />
         </label>
         <button className='btn' disabled={isPending}>

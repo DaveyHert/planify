@@ -22,6 +22,7 @@ function App() {
     currentlocation !== "/" &&
     currentlocation !== "/sign-up" &&
     currentlocation !== "/sign-in";
+  // Bug, error page shows sidebar
 
   return (
     authIsReady && (

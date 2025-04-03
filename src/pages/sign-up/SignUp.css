@@ -10,27 +10,49 @@
 .auth-form .avatar {
   display: flex;
   align-items: center;
-  position: relative;
-
-  border: 2px solid red;
-  padding: 5px 10px;
-  border-radius: 20px;
-  font-size: 1rem;
+  cursor: pointer;
+  border: 2px solid rgba(101, 101, 102, 0.117);
+  padding: 5px 8px;
+  border-radius: 5px;
+  font-size: 0.95rem;
   color: rgb(101, 101, 102);
+  width: 60%;
+  border-radius: 20px;
 }
 .auth-form .avatar img {
   width: 20px;
   margin-right: 5px;
+  filter: invert(40%);
+}
+.auth-form .avatar:active {
+  outline: 1px solid #444;
 }
 
-.auth-form .avatar + input[type="file"] {
+.auth-form input[type="file"] {
   display: none;
-} /* .auth-form .avatar:before {
-  position: absolute;
-  content: "";
-  bottom: 0;
-  left: 0;
-  border: 2px solid red;
+}
 
-  background-color: red;
-} */
+.auth-form .avatar-preview {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: 1rem;
+  position: absolute;
+  right: 20%;
+  top: -8px;
+  border: 2px solid var(--primary-color);
+}
+
+.auth-form .avatar-group.active {
+  display: flex;
+  position: relative;
+}
+
+.auth-form label:has(.avatar-preview) .avatar {
+  color: rgb(190, 190, 190);
+}
+.auth-form label:has(.avatar-preview) .avatar img {
+  filter: invert(90%);
+}

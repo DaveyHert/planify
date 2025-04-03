@@ -4,12 +4,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBlBtd33IQZvnuEvuoGCmiTALmsXnB67nw",
-  authDomain: "planify-project-management-app.firebaseapp.com",
-  projectId: "planify-project-management-app",
-  storageBucket: "planify-project-management-app.firebasestorage.app",
-  messagingSenderId: "104550487473",
-  appId: "1:104550487473:web:c598078bd61b27a2e75990",
+  apiKey: "AIzaSyDu4F4HZ_IBF6h_K4C_ivhk1LxHpa3qKkY",
+  authDomain: "planify-project-manageme-3db7b.firebaseapp.com",
+  projectId: "planify-project-manageme-3db7b",
+  storageBucket: "planify-project-manageme-3db7b.firebasestorage.app",
+  messagingSenderId: "570588374549",
+  appId: "1:570588374549:web:178717ba9df9ccb065901c",
 };
 
 // Initialize Firebase

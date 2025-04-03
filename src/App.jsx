@@ -15,7 +15,7 @@ import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 
 function App() {
-  const { authIsReady } = useAuthContext();
+  const { authIsReady, user } = useAuthContext();
   const currentlocation = useLocation().pathname;
 
   const showSidebar =
@@ -28,7 +28,7 @@ function App() {
     authIsReady && (
       <>
         <div className='App'>
-          {showSidebar && <Sidebar />}
+          {showSidebar && user && <Sidebar />}
           <div className='container'>
             {currentlocation !== "/" && <Navbar />}
             <Routes>

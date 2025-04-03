@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { firestoreDB } from "../firebase/config";
+import { useAuthContext } from "./useAuthContext";
 
-export function useCollection(collectionName, uid) {
-  const [data, setData] = useState([]);
+export function useCollection(collectionName) {
+  const [data, setData] = useState(null);
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(null);
 
+  const { user } = useAuthContext();
   useEffect(() => {
-    if (!collectionName || !uid) return;
+    if (!collectionName || !user) return;
 
     // reset states
     setData(null);
@@ -16,14 +18,24 @@ export function useCollection(collectionName, uid) {
     setError(null);
 
     // Get all documents in collection
-    const colRef = collection(firestoreDB, "users", uid, collectionName);
+    const colRef = collection(firestoreDB, "users", user.uid, collectionName);
     const unsub = onSnapshot(
       colRef,
       (snapshot) => {
+        console.log(snapshot);
+
+        if (snapshot.empty) {
+          setError(`No ${collectionName}s available`);
+          setIsPending(false);
+          return; // Prevent further execution
+        }
+
         const docs = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
+
+        // save data received
         setData(docs);
         setIsPending(false);
       },
@@ -34,7 +46,7 @@ export function useCollection(collectionName, uid) {
     );
 
     return () => unsub(); // Cleanup function
-  }, [collectionName, uid]);
+  }, [collectionName]);
 
   return { data, isPending, error };
 }

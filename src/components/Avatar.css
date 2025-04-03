@@ -1,5 +1,5 @@
 .user {
-  font-weight: bold;
+  font-weight: 500;
   text-align: center;
   letter-spacing: 1px;
   padding: 40px 0;
@@ -18,19 +18,19 @@
   display: block;
   position: absolute;
   content: "";
-  width: 16px;
-  height: 16px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  background: rgb(118, 187, 13);
-  border: 3px solid #fff;
-  bottom: 6px;
-  right: 2px;
+  background: #00c61c;
+  border: 2px solid #fff;
+  bottom: 8px;
+  right: 8px;
 }
 
 .user .avatar {
   width: 70px;
   height: 70px;
-  border: 3px solid #fff;
+  border: 2px solid #fff;
   object-fit: cover;
   border-radius: 50%;
 }

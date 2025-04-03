@@ -3,7 +3,7 @@ import { firebaseAuth, firebaseStorage, firestoreDB } from "../firebase/config";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useAuthContext } from "./useAuthContext";
-import { collection, setDoc } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 
 export function useSignUp() {
   const [isPending, setIsPending] = useState(false);
@@ -36,7 +36,7 @@ export function useSignUp() {
       await updateProfile(res.user, { displayName, photoURL: avatarURL });
 
       // create a user document for the user with their unique ID
-      const docRef = collection(firestoreDB, "users", res.user.uid);
+      const docRef = doc(firestoreDB, "users", res.user.uid);
       await setDoc(docRef, { online: true, displayName, photoURL: avatarURL });
 
       dispatch({ type: "SIGN_UP", payload: res.user });

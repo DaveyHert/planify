@@ -25,7 +25,7 @@ function SignUp() {
       setInvalidInput("Please select an image");
       return;
     }
-
+    // ensure image size is not too large
     if (imageFile.size > 1000000) {
       setInvalidInput("Image too large, must be smaller than 1 MB");
       return;

@@ -22,7 +22,7 @@
 .navbar .logo a {
   display: flex;
   align-items: center;
-  font-size: 2rem;
+  font-size: 1.4rem;
   background-color: #d3e0ff;
   background-color: #4158d0;
   background-image: linear-gradient(
@@ -47,7 +47,7 @@
 
 .navbar .logo img {
   margin-right: 10px;
-  width: 35px;
+  width: 25px;
   filter: invert(60%);
 }
 

@@ -7,13 +7,6 @@
 }
 
 /* avatar in sidebar  */
-.user .avatar {
-  width: 70px;
-  height: 70px;
-  border: 3px solid #fff;
-  object-fit: cover;
-  border-radius: 50%;
-}
 
 .user .avatar-wrapper {
   position: relative;
@@ -28,8 +21,16 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: greenyellow;
+  background: rgb(118, 187, 13);
   border: 3px solid #fff;
   bottom: 6px;
   right: 2px;
+}
+
+.user .avatar {
+  width: 70px;
+  height: 70px;
+  border: 3px solid #fff;
+  object-fit: cover;
+  border-radius: 50%;
 }

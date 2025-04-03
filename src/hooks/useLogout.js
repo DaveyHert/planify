@@ -9,13 +9,13 @@ export function useLogout() {
   const [error, setError] = useState(null);
   const { dispatch, user } = useAuthContext();
 
-  //   log user out
+  //   Log user out
   const logOutUser = async () => {
     setIsPending(true);
     setError(null);
 
     try {
-      // update online status
+      // Update online status
       const docRef = doc(firestoreDB, "users", user.uid);
       await updateDoc(docRef, { online: false });
 
@@ -23,11 +23,12 @@ export function useLogout() {
       await signOut(firebaseAuth);
       console.log(user);
 
-      // update global auth context
+      // Update global auth context
       dispatch({ type: "LOG_OUT" });
       setIsPending(false);
+
+      // Handle pottential error
     } catch (err) {
-      // An error happened.
       setIsPending(false);
       setError(err.message);
     }

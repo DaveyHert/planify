@@ -16,21 +16,23 @@ export function useSignIn() {
 
     // Sign user in
     try {
-      const userRes = await signInWithEmailAndPassword(
+      const res = await signInWithEmailAndPassword(
         firebaseAuth,
         email,
         password
       );
 
-      if (!userRes.user) throw new Error("Failed to sign in");
+      if (!res.user) throw new Error("Failed to sign in");
 
       // Update user's online status
-      const docRef = doc(firestoreDB, "users", userRes.user.uid);
+      const docRef = doc(firestoreDB, "users", res.user.uid);
       await updateDoc(docRef, { online: true });
 
-      // update global auth context
-      dispatch({ type: "SIGN_IN", payload: userRes.user });
+      // Update global auth context
+      dispatch({ type: "SIGN_IN", payload: res.user });
       setIsPending(false);
+
+      // Handle pottential error
     } catch (err) {
       setError(err.message);
       setIsPending(false);

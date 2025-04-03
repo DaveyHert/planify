@@ -20,12 +20,13 @@ function SignUp() {
   const handleAvatarChange = (e) => {
     console.log(e);
     const imageFile = e.target.files[0];
-    console.log(imageFile);
+
+    // Verify image is selected
     if (!imageFile || !imageFile.type.includes("image")) {
       setInvalidInput("Please select an image");
       return;
     }
-    // ensure image size is not too large
+    // Ensure image size is not too large
     if (imageFile.size > 1000000) {
       setInvalidInput("Image too large, must be smaller than 1 MB");
       return;
@@ -38,7 +39,7 @@ function SignUp() {
 
   const { signUpNewUser, isPending, error, response } = useSignUp();
 
-  // handle form data update
+  // Handle form data update
   const handleChange = (e) => {
     setFormData((prevData) => ({
       ...prevData,
@@ -46,10 +47,11 @@ function SignUp() {
     }));
   };
 
-  // handle sign up
+  // Handle sign up
   const handleSignUp = (e) => {
     e.preventDefault();
 
+    // Verify all inputs have values
     if (
       !formData.email ||
       !formData.password ||
@@ -60,6 +62,7 @@ function SignUp() {
       return;
     }
 
+    // Sign up user
     signUpNewUser(
       formData.email,
       formData.password,

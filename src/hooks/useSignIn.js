@@ -1,17 +1,16 @@
 import { useState } from "react";
-import { firebaseAuth } from "../firebase/config";
+import { firebaseAuth, firestoreDB } from "../firebase/config";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useAuthContext } from "./useAuthContext";
+import { doc, updateDoc } from "firebase/firestore";
 
 export function useSignIn() {
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(null);
 
-  const { dispatch } = useAuthContext();
+  const { dispatch, user } = useAuthContext();
 
   const signUserIn = async (email, password) => {
-    let isMounted = true; // Prevent state updates if unmounted
-
     setIsPending(true);
     setError(null);
 
@@ -25,15 +24,15 @@ export function useSignIn() {
 
       if (!userRes.user) throw new Error("Failed to sign in");
 
-      if (isMounted) {
-        setIsPending(false);
-        dispatch({ type: "SIGN_IN", payload: userRes.user });
-      }
+      // Update user's online status
+      const docRef = doc(firestoreDB, "users", userRes.user.uid);
+      await updateDoc(docRef, { online: true });
+
+      setIsPending(false);
+      dispatch({ type: "SIGN_IN", payload: userRes.user });
     } catch (err) {
-      if (isMounted) {
-        setError(err.message);
-        setIsPending(false);
-      }
+      setError(err.message);
+      setIsPending(false);
     }
   };
 

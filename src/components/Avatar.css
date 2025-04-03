@@ -1,0 +1,17 @@
+.user {
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 1px;
+  padding: 40px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* avatar in sidebar  */
+.user .avatar {
+  margin-bottom: 10px;
+  width: 70px;
+  height: 70px;
+  border: 3px solid #fff;
+  object-fit: cover;
+  border-radius: 50%;
+}

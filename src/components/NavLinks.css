@@ -1,0 +1,27 @@
+.nav-links {
+  margin-top: 80px;
+  margin-left: 20px;
+}
+.nav-links li {
+  margin-top: 10px;
+}
+.nav-links a {
+  display: flex;
+  padding: 10px;
+  text-decoration: none;
+  width: 100%;
+  color: #fff;
+  box-sizing: border-box;
+}
+.nav-links img {
+  margin-right: 10px;
+  filter: invert(100%);
+}
+.nav-links a.active {
+  color: #555;
+  background: var(--bg-color);
+  border-radius: 20px 0 0 20px;
+}
+.nav-links .active img {
+  filter: invert(40%);
+}

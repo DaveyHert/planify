@@ -8,7 +8,7 @@ export function useSignIn() {
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(null);
 
-  const { dispatch, user } = useAuthContext();
+  const { dispatch } = useAuthContext();
 
   const signUserIn = async (email, password) => {
     setIsPending(true);
@@ -28,8 +28,9 @@ export function useSignIn() {
       const docRef = doc(firestoreDB, "users", userRes.user.uid);
       await updateDoc(docRef, { online: true });
 
-      setIsPending(false);
+      // update global auth context
       dispatch({ type: "SIGN_IN", payload: userRes.user });
+      setIsPending(false);
     } catch (err) {
       setError(err.message);
       setIsPending(false);

@@ -11,8 +11,8 @@ export function useLogout() {
 
   //   log user out
   const logOutUser = async () => {
-    console.log("Signing out");
     setIsPending(true);
+    setError(null);
 
     try {
       // update online status
@@ -23,8 +23,9 @@ export function useLogout() {
       await signOut(firebaseAuth);
       console.log(user);
 
-      setIsPending(false);
+      // update global auth context
       dispatch({ type: "LOG_OUT" });
+      setIsPending(false);
     } catch (err) {
       // An error happened.
       setIsPending(false);

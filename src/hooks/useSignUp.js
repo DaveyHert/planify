@@ -29,13 +29,15 @@ export function useSignUp() {
       const uploadPath = `thumnbnails/${res.user.uid}/${avatar.name}`;
       const storageRef = ref(firebaseStorage, uploadPath);
       const snapshot = await uploadBytes(storageRef, avatar);
+      if (!snapshot) throw new Error("Failed to upload profile image");
 
-      //
-      console.log(snapshot.get());
+      //get avatar url
+      const avatarURL = await getDownloadURL(storageRef);
+      console.log(avatarURL);
 
       // update new user with display name
-      await updateProfile(res.user, { displayName });
-
+      await updateProfile(res.user, { displayName, photoURL: avatarURL });
+      console.log(res);
       if (isMounted) {
         dispatch({ type: "SIGN_UP", payload: res.user });
         setIsPending(false);

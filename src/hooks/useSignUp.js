@@ -39,6 +39,7 @@ export function useSignUp() {
       const docRef = doc(firestoreDB, "users", res.user.uid);
       await setDoc(docRef, { online: true, displayName, photoURL: avatarURL });
 
+      // store current user in our global context
       dispatch({ type: "SIGN_UP", payload: res.user });
       setIsPending(false);
       setResponse(res);

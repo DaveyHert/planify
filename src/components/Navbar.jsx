@@ -3,10 +3,11 @@ import "./Navbar.css";
 import { useAuthContext } from "../hooks/useAuthContext";
 import Logo from "../assets/logo.svg";
 import { useLogout } from "../hooks/useLogout";
+import Error from "./Error";
 
 function Navbar() {
   const { user } = useAuthContext();
-  const { logOutUser } = useLogout();
+  const { logOutUser, isPending, error } = useLogout();
 
   return (
     <nav className={`navbar ${user ? "modify" : ""}`}>
@@ -35,13 +36,21 @@ function Navbar() {
               <span className='name'>hello, {user.displayName}</span>
             </li>
             <li>
-              <button className='btn' onClick={logOutUser}>
-                Logout
-              </button>
+              {!isPending && (
+                <button className='btn' onClick={logOutUser}>
+                  Logout
+                </button>
+              )}
+              {isPending && (
+                <button className='btn' disabled>
+                  Logging out
+                </button>
+              )}
             </li>
           </>
         )}
       </ul>
+      {error && <Error message={error} />}
     </nav>
   );
 }

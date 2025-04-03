@@ -1,22 +1,32 @@
 import { firebaseAuth } from "../firebase/config";
 import { signOut } from "firebase/auth";
 import { useAuthContext } from "./useAuthContext";
+import { useState } from "react";
+import { setDoc } from "firebase/firestore";
 
 export function useLogout() {
+  const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState(null);
+  const [isCancelled, setIsCancelled] = useState(false);
   const { dispatch } = useAuthContext();
 
   //   log user out
   const logOutUser = () => {
+    console.log("Signing out");
+    setIsPending(true);
     signOut(firebaseAuth)
       .then(() => {
         // Sign-out successful.
-        console.log("User signed out successfully.");
+        console.log("signed out");
+        // setDoc();
+        setIsPending(false);
         dispatch({ type: "LOG_OUT" });
       })
       .catch((err) => {
         // An error happened.
-        console.error("Error signing out: ", err);
+        setIsPending(false);
+        setError(err.message);
       });
   };
-  return { logOutUser };
+  return { logOutUser, isPending, error };
 }

@@ -18,12 +18,16 @@ function SignUp() {
   });
 
   const handleAvatarChange = (e) => {
-    // console.log(e);
+    console.log(e);
     const imageFile = e.target.files[0];
-    if (!imageFile) return;
+    console.log(imageFile);
+    if (!imageFile) {
+      setInvalidInput("Please select a file");
+      return;
+    }
 
-    if (imageFile.size > 100000) {
-      setInvalidInput("Image too large, must be smaller tha 1mb");
+    if (imageFile.size > 1000000) {
+      setInvalidInput("Image too large, must be smaller than 1 MB");
       return;
     }
 

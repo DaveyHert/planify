@@ -8,15 +8,17 @@ export default function OnlineUsers() {
   return (
     <div className='user-list'>
       <h2>All Users</h2>
-      {error && <div className='error'>{error}</div>}
-      {data &&
-        data.map((user) => (
-          <div key={user.id} className='user-list-item'>
-            {user.online && <span className='online-user'></span>}
-            <span>{user.displayName}</span>
-            <Avatar src={user.photoURL} />
-          </div>
-        ))}
+      <div className='list-content'>
+        {error && <div className='error'>{error}</div>}
+        {data &&
+          data.map((user) => (
+            <div key={user.id} className='user-list-item'>
+              {user.online && <span className='online-user'></span>}
+              <span>{user.displayName}</span>
+              <Avatar src={user.photoURL} />
+            </div>
+          ))}
+      </div>
     </div>
   );
 }

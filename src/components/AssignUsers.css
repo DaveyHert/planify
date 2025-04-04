@@ -1,0 +1,66 @@
+.users-list {
+  width: 304px;
+  box-sizing: border-box;
+  background: #fbfbfb;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 30%;
+  overflow: hidden;
+  height: 60vh;
+  border-radius: 8px;
+  z-index: 10;
+  color: #172b4d;
+}
+.users-list h3 {
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 15px 10px;
+  color: var(--text-subtle);
+}
+.users-list-item {
+  display: flex;
+  align-items: center;
+  margin: 20px auto;
+  font-size: 0.9rem;
+  padding: 5px 0;
+  color: var(--text-main);
+}
+.users-list-item:hover {
+  background-color: #f1f2f4;
+  cursor: pointer;
+}
+.users-list-item:active {
+  transform: scale(1.05);
+}
+
+.users-list-item .avatar-wrapper {
+  margin: 0 10px 0 30px;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+}
+
+/* online status */
+.users-list-item .avatar-wrapper::after {
+  display: none;
+}
+
+.users-list-item.online .avatar {
+  border: 1px solid var(--online);
+}
+
+.users-list-content {
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #8d69f1 #d2c4fa;
+  scroll-behavior: smooth;
+  scrollbar-highlight-color: red;
+  -webkit-overflow-scrolling: touch;
+
+  /* smoother on iOS/macOS */
+}

@@ -20,8 +20,7 @@ export function useCollection(collectionName) {
     const unsub = onSnapshot(
       colRef,
       (snapshot) => {
-        console.log(snapshot);
-
+        // verify snapshot isn't empty
         if (snapshot.empty) {
           setError(`No ${collectionName} available`);
           setIsPending(false);

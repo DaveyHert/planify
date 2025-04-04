@@ -80,8 +80,6 @@ function Home() {
           </div>
         </div>
       </div>
-
-      {/* Any sibling elements here will also appear above the blurred background */}
     </div>
   );
 }

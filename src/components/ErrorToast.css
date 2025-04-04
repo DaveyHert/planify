@@ -1,4 +1,4 @@
-.error {
+.error-toast {
   font-size: 1rem;
   color: red;
   background: pink;
@@ -13,11 +13,11 @@
   animation: shake-toast 1s ease-out;
 }
 
-.error p {
+.error-toast p {
   padding: 8px;
 }
 
-.error .timeout {
+.error-toast .timeout {
   align-self: flex-end;
   display: block;
   height: 5px;
@@ -52,6 +52,6 @@
   }
 }
 
-.error:nth-of-type(even) {
+.error-toast:nth-of-type(even) {
   top: 20%;
 }

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSignUp } from "../../hooks/useSignUp";
 import ProgressIcon from "../../components/ProgressIcon";
 import AvatarIcon from "../../assets/avatar-icon.svg";
-import Error from "../../components/Error";
+import Error from "../../components/ErrorToast";
 
 import "./SignUp.css";
 

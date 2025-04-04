@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useSignIn } from "../../hooks/useSignIn";
 import ProgressIcon from "../../components/ProgressIcon";
-import Error from "../../components/Error";
+import Error from "../../components/ErrorToast";
 
 function SignIn() {
   const emailRef = useRef(null);

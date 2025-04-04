@@ -13,6 +13,7 @@ import Home from "./pages/Home/Home";
 import SignIn from "./pages/sign-in/SignIn";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
+import OnlineUsers from "./components/OnlineUsers";
 
 function App() {
   const { authIsReady, user } = useAuthContext();
@@ -50,6 +51,7 @@ function App() {
               <Route path='*' element={<p>Page not found</p>} />
             </Routes>
           </div>
+          {user && <OnlineUsers />}
         </div>
       </>
     )

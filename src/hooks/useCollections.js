@@ -1,31 +1,29 @@
 import { useEffect, useState } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { firestoreDB } from "../firebase/config";
-import { useAuthContext } from "./useAuthContext";
 
 export function useCollection(collectionName) {
   const [data, setData] = useState(null);
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(null);
 
-  const { user } = useAuthContext();
   useEffect(() => {
-    if (!collectionName || !user) return;
+    if (!collectionName) return;
 
     // reset states
-    setData(null);
     setIsPending(true);
     setError(null);
+    setData(null);
 
     // Get all documents in collection
-    const colRef = collection(firestoreDB, "users", user.uid, collectionName);
+    const colRef = collection(firestoreDB, collectionName);
     const unsub = onSnapshot(
       colRef,
       (snapshot) => {
         console.log(snapshot);
 
         if (snapshot.empty) {
-          setError(`No ${collectionName}s available`);
+          setError(`No ${collectionName} available`);
           setIsPending(false);
           return; // Prevent further execution
         }

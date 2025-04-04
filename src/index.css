@@ -11,7 +11,9 @@
   --bg-color: #f4f4f4;
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 /* base styles */

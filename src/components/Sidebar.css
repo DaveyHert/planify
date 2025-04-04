@@ -1,6 +1,6 @@
 .sidebar {
-  min-width: 300px;
-  width: 300px;
+  min-width: 205px;
+  width: min(30%, 300px);
   background: var(--primary-color);
   min-height: 100vh;
   box-sizing: border-box;
@@ -8,8 +8,9 @@
   color: #fff;
 }
 .sidebar-content {
-  position: fixed;
-  width: inherit;
+  /* position: fixed; */
+
+  width: 100%;
 }
 .sidebar .user {
   font-weight: bold;

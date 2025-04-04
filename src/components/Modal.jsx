@@ -12,11 +12,11 @@ const Modal = ({ children, onClose, type }) => {
 
       if (modalRef.current && !modalRef.current.contains(e.target)) {
         onClose();
-      }
+      } // close modal only if target clicked isn't modals content/children
     };
     document.addEventListener("mousedown", handleClickOutside);
 
-    // cleanup to remove event once modal is closed
+    // cleanup to remove eventlistener once modal is closed
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 

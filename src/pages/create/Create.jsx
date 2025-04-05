@@ -1,8 +1,8 @@
-import { useState, useRef } from "react";
-import Avatar from "../../components/Avatar";
-import "./Create.css";
+import { useState } from "react";
 import AssignUsers from "../../components/AssignUsers";
+import Avatar from "../../components/Avatar";
 import Modal from "../../components/Modal";
+import "./Create.css";
 
 function Create() {
   const [name, setName] = useState("");
@@ -24,6 +24,11 @@ function Create() {
   // close modal
   const closeModal = () => {
     setShowModal(false);
+  };
+
+  // handle delete
+  const handleDelete = (user) => {
+    setAssignedUsers((prevUsers) => prevUsers.filter((u) => u.id !== user.id));
   };
 
   return (
@@ -89,10 +94,20 @@ function Create() {
               assignedUsers.map((user) => (
                 <li key={user.id} data-user-name={user.displayName}>
                   <Avatar src={user.photoURL} />
+                  <span
+                    className='delete'
+                    title='remove'
+                    onClick={() => handleDelete(user)}
+                  >
+                    -
+                  </span>
                 </li>
               ))}
 
-            <li className='assign-user-icon' onClick={() => setShowModal(true)}>
+            <li
+              className={`assign-user-icon ${showModal ? "active" : ""}`}
+              onClick={() => setShowModal(true)}
+            >
               +
             </li>
           </ul>

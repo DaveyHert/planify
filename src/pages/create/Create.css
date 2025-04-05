@@ -12,6 +12,9 @@
   margin-right: 5px;
   font-size: 1rem;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .assigned-list .avatar-wrapper::after {
   display: none;
@@ -21,9 +24,11 @@
   width: 50px;
   height: 50px;
   cursor: pointer;
+  transition: opacity 0.2s ease;
 }
-.assigned-list .avatar-wrapper:hover {
-  transform: scale(1.02);
+.assigned-list .avatar-wrapper:hover .avatar {
+  opacity: 0.9;
+  border-width: 2px;
 }
 
 /* .assigned-list span {
@@ -45,6 +50,9 @@
 
 .assign-user-icon:hover {
   background-color: #bababa;
+}
+.assign-user-icon.active {
+  background-color: var(--text-main);
 }
 
 /* Hover tooltip with user's name */
@@ -70,4 +78,25 @@
 .assigned-list li[data-user-name]:hover::after {
   visibility: visible;
   opacity: 1;
+}
+
+.assigned-list .delete {
+  margin-top: 3px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  color: rgb(225, 148, 148);
+  width: 20px;
+  height: 20px;
+  border-radius: 35px;
+  background: #f9d3d3;
+  cursor: pointer;
+}
+
+.assigned-list li[data-user-name]:hover .delete {
+  display: flex;
+}
+.assigned-list .delete:hover {
+  color: #fbdede;
+  background: rgb(225, 130, 130);
 }

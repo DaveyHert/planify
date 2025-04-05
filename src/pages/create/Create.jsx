@@ -77,7 +77,10 @@ function Create() {
           <span>Assign to:</span>
           {showModal && (
             <Modal type='no-style' onClose={closeModal}>
-              <AssignUsers handleAssignToUser={assignToUser} />
+              <AssignUsers
+                handleAssignToUser={assignToUser}
+                closeModal={closeModal}
+              />
             </Modal>
           )}
 

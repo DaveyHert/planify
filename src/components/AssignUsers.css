@@ -67,7 +67,7 @@
 .user-search {
   width: 95%;
   display: block;
-  margin: 0 auto;
+  margin: 3px auto;
   outline-color: #172b4d22;
   font-size: 1rem;
   padding: 10px 8px 10px 12px;
@@ -77,4 +77,29 @@
   color: #abb0ba;
   font-weight: 300;
   padding: 0 5px;
+}
+.users-list section {
+  position: relative;
+}
+
+.users-list section .close-modal {
+  position: absolute;
+  display: block;
+  top: 0;
+  right: 0;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: 300;
+  color: #626f86;
+}
+.users-list section .close-modal:hover {
+  background-color: #091e4224;
+  border-radius: 0 0 0 8px;
+}
+
+.no-results {
+  font-size: 1rem;
+  color: var(--text-light);
+  justify-self: center;
+  margin-top: 30px;
 }

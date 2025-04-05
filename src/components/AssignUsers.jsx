@@ -2,11 +2,12 @@ import { useCollection } from "../hooks/useCollections";
 import Avatar from "./Avatar";
 import ProgressIcon from "./ProgressIcon";
 import "./AssignUsers.css";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
-export default function AssignUsers({ handleAssignToUser, searchUser }) {
+export default function AssignUsers({ handleAssignToUser, closeModal }) {
   const { data: users, error, isPending } = useCollection("users");
   const [search, setSearch] = useState("");
+  const searchRef = useRef();
 
   //   handle user selection
   const handleClick = (user) => {
@@ -26,9 +27,31 @@ export default function AssignUsers({ handleAssignToUser, searchUser }) {
     ); //return data that includes searched term
   }, [users, search]);
 
+  // use keyboard search
+  useEffect(() => {
+    const keyboardAccessibility = (e) => {
+      if (e.key === "Escape") return closeModal();
+      if (searchRef.current === window.document.activeElement) {
+        return; // return if search input already in focus
+      } else {
+        return searchRef.current.focus(); // focus on search input
+      }
+    };
+
+    window.addEventListener("keydown", keyboardAccessibility);
+    return () => window.removeEventListener("keydown", keyboardAccessibility);
+    //add listoner and cleanup when unmounted
+  }, []);
+
   return (
-    <ul className='users-list'>
-      <h3>Assign User</h3>
+    <div className='users-list'>
+      <section>
+        <h3>Assign User</h3>
+        <span className='close-modal' onClick={() => closeModal()}>
+          &#10005;
+        </span>
+      </section>
+
       <div className='users-list-content'>
         {error && <div className='error'>{error}</div>}
         {isPending && <ProgressIcon />}
@@ -38,6 +61,7 @@ export default function AssignUsers({ handleAssignToUser, searchUser }) {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder='search members'
+          ref={searchRef}
         />
         {users &&
           filteredUsers.map((user) => (
@@ -50,7 +74,12 @@ export default function AssignUsers({ handleAssignToUser, searchUser }) {
               <span>{user.displayName}</span>
             </div>
           ))}
+
+        {/* Optionally show a “no results” message */}
+        {!isPending && filteredUsers.length === 0 && (
+          <div className='no-results'>No users found!</div>
+        )}
       </div>
-    </ul>
+    </div>
   );
 }

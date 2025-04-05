@@ -5,11 +5,13 @@
 
 .assigned-list {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .assigned-list li {
   margin-right: 5px;
   font-size: 1rem;
+  position: relative;
 }
 .assigned-list .avatar-wrapper::after {
   display: none;
@@ -18,8 +20,15 @@
 .assigned-list .avatar-wrapper {
   width: 50px;
   height: 50px;
+  cursor: pointer;
+}
+.assigned-list .avatar-wrapper:hover {
+  transform: scale(1.02);
 }
 
+/* .assigned-list span {
+  font-size: 0.6rem;
+} */
 .assign-user-icon {
   width: 45px;
   height: 45px;
@@ -32,4 +41,33 @@
   border: 2px solid white;
   color: white;
   cursor: pointer;
+}
+
+.assign-user-icon:hover {
+  background-color: #bababa;
+}
+
+/* Hover tooltip with user's name */
+.assigned-list li[data-user-name]::after {
+  content: attr(data-user-name);
+  position: absolute;
+  top: -35px;
+  left: 0;
+  background-color: #cccccc;
+  padding: 4px 8px;
+  color: #222;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  border-radius: 5px 0;
+  transition: all 0.1s ease 0.4s;
+  box-shadow: 0px 0px 2px rgba(34, 34, 34, 0.38);
+  background-image: -webkit-linear-gradient(top, #f8f8f8, #cccccc);
+  opacity: 0;
+  z-index: 99999;
+  visibility: hidden;
+}
+
+.assigned-list li[data-user-name]:hover::after {
+  visibility: visible;
+  opacity: 1;
 }

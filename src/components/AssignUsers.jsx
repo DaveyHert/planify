@@ -1,14 +1,14 @@
 import { useCollection } from "../hooks/useCollections";
 import Avatar from "./Avatar";
+import ProgressIcon from "./ProgressIcon";
 import "./AssignUsers.css";
 
-export default function AssignUsers() {
-  const { data, error } = useCollection("users");
+export default function AssignUsers({ handleAssignToUser }) {
+  const { data, error, isPending } = useCollection("users");
 
   //   handle user selection
   const handleClick = (user) => {
-    console.log(user);
-    // handleAssignTo(user);
+    handleAssignToUser(user);
   };
 
   return (
@@ -16,6 +16,7 @@ export default function AssignUsers() {
       <h3>Assign User</h3>
       <div className='users-list-content'>
         {error && <div className='error'>{error}</div>}
+        {isPending && <ProgressIcon />}
         {data &&
           data.map((user) => (
             <div

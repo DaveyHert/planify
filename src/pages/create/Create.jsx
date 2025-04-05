@@ -1,5 +1,4 @@
 import { useState, useRef } from "react";
-import { useCollection } from "../../hooks/useCollections";
 import Avatar from "../../components/Avatar";
 import "./Create.css";
 import AssignUsers from "../../components/AssignUsers";
@@ -13,27 +12,17 @@ function Create() {
   const [assignedUsers, setAssignedUsers] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
-  const modalRef = useRef();
-  const { data, error, isPending } = useCollection("users");
-  const handleAssignTo = (e) => {
-    const selectedUser = data.find((u) => u.id === e.target.value);
-
-    //  only add user if not already added
-    if (
-      assignedUsers &&
-      !assignedUsers.some((user) => user.id === selectedUser.id)
-    ) {
-      setAssignedUsers((prevUsers) =>
-        setAssignedUsers([...prevUsers, selectedUser])
-      );
+  const assignToUser = (user) => {
+    // check if user is already added
+    if (!assignedUsers.some((u) => u.id === user.id)) {
+      setAssignedUsers((prevUsers) => [...prevUsers, user]);
     }
-    console.log(selectedUser);
+    setShowModal(false);
   };
 
-  const handleModal = (e) => {
-    console.log(e);
+  // close modal
+  const closeModal = () => {
     setShowModal(false);
-    // console.log(e);
   };
 
   return (
@@ -49,6 +38,7 @@ function Create() {
             onChange={(e) => setName(e.target.value)}
           />
         </label>
+
         <label>
           <span>Project details:</span>
           <textarea
@@ -72,6 +62,7 @@ function Create() {
             <option value='project-management'>Project Management</option>
           </select>
         </label>
+
         <label>
           <span>Set due date:</span>
           <input
@@ -80,22 +71,23 @@ function Create() {
             onChange={(e) => setDueDate(e.target.value)}
           />
         </label>
+
         <label>
           <span>Assign to:</span>
           {showModal && (
-            <Modal type='no-style' onClose={handleModal}>
-              <AssignUsers />
+            <Modal type='no-style' onClose={closeModal}>
+              <AssignUsers handleAssignToUser={assignToUser} />
             </Modal>
           )}
+
           <ul className='assigned-list'>
             {assignedUsers &&
-              assignedUsers.length > 0 &&
               assignedUsers.map((user) => (
-                <li key={user.id}>
+                <li key={user.id} data-user-name={user.displayName}>
                   <Avatar src={user.photoURL} />
-                  <span>{user.displayName}</span>
                 </li>
               ))}
+
             <li className='assign-user-icon' onClick={() => setShowModal(true)}>
               +
             </li>

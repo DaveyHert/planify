@@ -12,12 +12,13 @@ function Create() {
   const [assignedUsers, setAssignedUsers] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
+  // Assigns project to users
   const assignToUser = (user) => {
     // check if user is already added
     if (!assignedUsers.some((u) => u.id === user.id)) {
       setAssignedUsers((prevUsers) => [...prevUsers, user]);
     }
-    setShowModal(false);
+    closeModal();
   };
 
   // close modal

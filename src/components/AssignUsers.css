@@ -15,7 +15,7 @@
 }
 .users-list h3 {
   text-align: center;
-  border-bottom: 1px solid #eee;
+
   font-size: 15px;
   font-weight: 500;
   padding: 15px 10px;
@@ -59,8 +59,22 @@
   scrollbar-width: thin;
   scrollbar-color: #8d69f1 #d2c4fa;
   scroll-behavior: smooth;
-  scrollbar-highlight-color: red;
   -webkit-overflow-scrolling: touch;
 
   /* smoother on iOS/macOS */
+}
+
+.user-search {
+  width: 95%;
+  display: block;
+  margin: 0 auto;
+  outline-color: #172b4d22;
+  font-size: 1rem;
+  padding: 10px 8px 10px 12px;
+}
+
+.user-search::placeholder {
+  color: #abb0ba;
+  font-weight: 300;
+  padding: 0 5px;
 }

@@ -55,14 +55,16 @@ export default function AssignUsers({ handleAssignToUser, closeModal }) {
       <div className='users-list-content'>
         {error && <div className='error'>{error}</div>}
         {isPending && <ProgressIcon />}
+
         <input
           type='text'
           className='user-search'
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder='search members'
+          placeholder='Search members...'
           ref={searchRef}
         />
+
         {users &&
           filteredUsers.map((user) => (
             <div

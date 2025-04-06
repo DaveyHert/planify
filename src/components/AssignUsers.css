@@ -57,7 +57,7 @@
   overflow-x: hidden;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: #8d69f1 #d2c4fa;
+  scrollbar-color: var(--primary-color) var(--primary-color-light);
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
 
@@ -68,15 +68,21 @@
   width: 95%;
   display: block;
   margin: 3px auto;
-  outline-color: #172b4d22;
   font-size: 1rem;
   padding: 10px 8px 10px 12px;
+  border-radius: 8px;
+}
+.user-search:focus {
+  background-color: #ffffff;
+  outline-color: var(--normal-blue);
 }
 
 .user-search::placeholder {
-  color: #abb0ba;
-  font-weight: 300;
+  color: #c0c0c0;
+  font-weight: 100;
   padding: 0 5px;
+  font-size: 0.9rem;
+  letter-spacing: 1.4px;
 }
 .users-list section {
   position: relative;

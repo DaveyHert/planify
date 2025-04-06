@@ -7,12 +7,16 @@
   --heading-color: #444;
   --text-color: #999;
   --primary-color: #8d69f1;
+  --primary-color-light: #d2c4fa;
   --highlight-color: #d13267;
   --bg-color: #f4f4f4;
   --online: #0ebb50;
+  --text-normal: #4b5563;
   --text-subtle: #44546f;
   --text-main: #172b4d;
   --text-light: #abb0ba;
+  --light-blue: #06b6d4;
+  --normal-blue: #388bff;
 }
 
 *,
@@ -72,6 +76,7 @@ label {
   display: block;
   margin: 24px auto;
 }
+
 label span {
   display: block;
   margin-bottom: 6px;

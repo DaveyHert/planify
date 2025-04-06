@@ -5,9 +5,10 @@
   border: 1px solid #ddd;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.05);
   background: #fff;
+  font-size: 1rem;
 }
 
-.auth-form .avatar {
+.auth-form .avatar-upload {
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -19,12 +20,12 @@
   width: 60%;
   border-radius: 20px;
 }
-.auth-form .avatar img {
+.auth-form .avatar-upload img {
   width: 20px;
   margin-right: 5px;
   filter: invert(40%);
 }
-.auth-form .avatar:active {
+.auth-form .avatar-upload:active {
   outline: 1px solid #444;
 }
 
@@ -51,9 +52,9 @@
   position: relative;
 }
 
-.auth-form label:has(.avatar-preview) .avatar {
+.auth-form label:has(.avatar-preview) .avatar-upload {
   color: rgb(190, 190, 190);
 }
-.auth-form label:has(.avatar-preview) .avatar img {
+.auth-form label:has(.avatar-preview) .avatar-upload img {
   filter: invert(90%);
 }

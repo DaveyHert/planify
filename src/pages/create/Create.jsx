@@ -2,7 +2,9 @@ import { useState } from "react";
 import AssignUsers from "../../components/AssignUsers";
 import Avatar from "../../components/Avatar";
 import Modal from "../../components/Modal";
+import SelectDropDown from "../../components/Dropdown";
 import "./Create.css";
+import CustomDatePicker from "../../components/CustomDatePicker";
 
 function Create() {
   const [name, setName] = useState("");
@@ -12,13 +14,25 @@ function Create() {
   const [assignedUsers, setAssignedUsers] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
+  const [currentMonth, setCurrentMonth] = useState(() => {
+    const today = new Date();
+    return new Date(today.getFullYear(), today.getMonth());
+  });
+
+  console.log(currentMonth);
+
   // Assigns project to users
   const assignToUser = (user) => {
-    // check if user is already added
+    // prevent duplicate
     if (!assignedUsers.some((u) => u.id === user.id)) {
       setAssignedUsers((prevUsers) => [...prevUsers, user]);
     }
     closeModal();
+  };
+
+  // handle delete
+  const handleRemoveUser = (user) => {
+    setAssignedUsers((prevUsers) => prevUsers.filter((u) => u.id !== user.id));
   };
 
   // close modal
@@ -26,9 +40,9 @@ function Create() {
     setShowModal(false);
   };
 
-  // handle delete
-  const handleDelete = (user) => {
-    setAssignedUsers((prevUsers) => prevUsers.filter((u) => u.id !== user.id));
+  // handle category selection
+  const saveCategory = (option) => {
+    setCategory(option);
   };
 
   return (
@@ -54,29 +68,19 @@ function Create() {
           ></textarea>
         </label>
 
-        <label>
-          <span>Project category:</span>
-          <select
-            name='category'
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          >
-            <option value='none'>None</option>
-            <option value='frontend'>Frontend</option>
-            <option value='backend'>Backend</option>
-            <option value='design'>Design</option>
-            <option value='project-management'>Project Management</option>
-          </select>
-        </label>
-
-        <label>
-          <span>Set due date:</span>
-          <input
-            type='date'
-            value={dueDate}
-            onChange={(e) => setDueDate(e.target.value)}
+        <div className='select-options'>
+          <span>Project category:</span>{" "}
+          <SelectDropDown
+            options={["Frontend", "Backend", "Design", "Project management"]}
+            category={category}
+            saveCategory={saveCategory}
           />
-        </label>
+        </div>
+
+        <div className='date-picker'>
+          <span>Set due date:</span>
+          <CustomDatePicker placeholder='Select due date' />
+        </div>
 
         <label>
           <span>Assign to:</span>
@@ -97,7 +101,7 @@ function Create() {
                   <span
                     className='delete'
                     title='remove'
-                    onClick={() => handleDelete(user)}
+                    onClick={() => handleRemoveUser(user)}
                   >
                     -
                   </span>

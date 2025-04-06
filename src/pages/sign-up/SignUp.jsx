@@ -130,7 +130,7 @@ function SignUp() {
         <label>
           Profile thumbnail:
           <div className={`avatar-group ${avatarPreview ? "active" : ""}`}>
-            <span className='avatar'>
+            <span className='avatar-upload'>
               <img src={AvatarIcon} alt='upload image' />
               Choose image
             </span>

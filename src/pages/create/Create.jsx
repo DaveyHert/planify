@@ -6,6 +6,13 @@ import Avatar from "../../components/Avatar";
 import Modal from "../../components/Modal";
 import "./Create.css";
 
+const categories = [
+  { value: "development", label: "Development" },
+  { value: "design", label: "Design" },
+  { value: "sales", label: "Sales" },
+  { value: "Marketing", label: "Marketing" },
+];
+
 function Create() {
   const [name, setName] = useState("");
   const [details, setDetails] = useState("");
@@ -34,9 +41,6 @@ function Create() {
   };
 
   // handle category selection
-  const saveCategory = (option) => {
-    setCategory(option);
-  };
 
   const handleSumit = (e) => {
     e.preventDefault();
@@ -78,7 +82,7 @@ function Create() {
           <CustomSelectDropdown
             options={["Frontend", "Backend", "Design", "Project management"]}
             category={category}
-            saveCategory={saveCategory}
+            saveCategory={(option) => setCategory(option)}
           />
         </div>
 

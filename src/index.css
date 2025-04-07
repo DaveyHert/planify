@@ -17,6 +17,7 @@
   --text-light: #abb0ba;
   --light-blue: #06b6d4;
   --normal-blue: #388bff;
+  --bg-blue: #4a90e2;
 }
 
 *,
@@ -91,6 +92,7 @@ textarea {
   border: 1px solid #ddd;
   border-radius: 4px;
   outline-color: #444;
+  resize: none;
 }
 textarea {
   min-height: 160px;

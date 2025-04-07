@@ -1,10 +1,10 @@
 import { useState } from "react";
 import AssignUsers from "../../components/AssignUsers";
+import CustomSelectDropdown from "../../components/CustomSelectDropdown";
+import CustomDatePicker from "../../components/CustomDatePicker";
 import Avatar from "../../components/Avatar";
 import Modal from "../../components/Modal";
-import SelectDropDown from "../../components/Dropdown";
 import "./Create.css";
-import CustomDatePicker from "../../components/CustomDatePicker";
 
 function Create() {
   const [name, setName] = useState("");
@@ -13,13 +13,6 @@ function Create() {
   const [dueDate, setDueDate] = useState("");
   const [assignedUsers, setAssignedUsers] = useState([]);
   const [showModal, setShowModal] = useState(false);
-
-  const [currentMonth, setCurrentMonth] = useState(() => {
-    const today = new Date();
-    return new Date(today.getFullYear(), today.getMonth());
-  });
-
-  console.log(currentMonth);
 
   // Assigns project to users
   const assignToUser = (user) => {
@@ -45,11 +38,23 @@ function Create() {
     setCategory(option);
   };
 
+  const handleSumit = (e) => {
+    e.preventDefault();
+    const projectData = {
+      name,
+      details,
+      category,
+      dueDate,
+      assignedUsers,
+    };
+    console.log(projectData);
+  };
+
   return (
     <div className='create-form'>
       <h2 className='page-title'>Create a new project</h2>
 
-      <form>
+      <form onSubmit={handleSumit}>
         <label>
           <span>Project name:</span>
           <input
@@ -70,7 +75,7 @@ function Create() {
 
         <div className='select-options'>
           <span>Project category:</span>{" "}
-          <SelectDropDown
+          <CustomSelectDropdown
             options={["Frontend", "Backend", "Design", "Project management"]}
             category={category}
             saveCategory={saveCategory}
@@ -79,7 +84,11 @@ function Create() {
 
         <div className='date-picker'>
           <span>Set due date:</span>
-          <CustomDatePicker placeholder='Select due date' />
+          <CustomDatePicker
+            placeholder='Select due date'
+            selectedDate={dueDate}
+            onDateChange={setDueDate}
+          />
         </div>
 
         <label>
@@ -116,6 +125,8 @@ function Create() {
             </li>
           </ul>
         </label>
+
+        <button className='btn'>Add Project</button>
       </form>
     </div>
   );

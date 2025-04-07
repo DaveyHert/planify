@@ -1,6 +1,8 @@
 .create-form {
   padding: 20px;
-  margin-top: 20px;
+  margin: 20px auto 0 auto;
+  max-width: 800px;
+  width: 100%;
 }
 
 .assigned-list {

@@ -1,106 +1,136 @@
 /* CustomDatePicker.css */
-
 .cdp-wrapper {
   position: relative;
   display: inline-block;
+  font-family: "Inter", sans-serif;
 }
 
 .cdp-input {
-  width: 160px;
-  padding: 8px 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  width: 100%;
+  padding: 10px 12px;
   font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #fff;
   cursor: pointer;
+  transition: border 0.2s;
 }
 
 .cdp-input:focus {
   outline: none;
-  border-color: #4a90e2;
-  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.3);
+  border-color: #0079bf;
 }
 
 .cdp-calendar {
   position: absolute;
-  top: calc(100% + 4px);
+  top: 100%;
   left: 0;
-  background: #fff;
-  border: 1px solid #ddd;
+  width: 280px;
+  margin-top: 8px;
+  background-color: #ffffff;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  z-index: 100;
-  width: 240px;
+  box-shadow: 0px 12px 28px rgba(0, 0, 0, 0.15);
+  padding: 16px;
+  z-index: 999;
 }
 
 .cdp-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 12px;
-  background-color: #4a90e2;
-  color: #fff;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  margin-bottom: 12px;
 }
 
 .cdp-nav {
   background: none;
   border: none;
-  color: #fff;
-  font-size: 18px;
+  font-size: 20px;
+  color: #444;
   cursor: pointer;
-  padding: 4px;
+  padding: 1px 8px;
 }
 
 .cdp-nav:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
+  background-color: var(--bg-color);
 }
 
 .cdp-month {
   font-weight: 600;
-  font-size: 14px;
+  font-size: 15px;
+  color: #333;
 }
 
-.cdp-days-row {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  padding: 8px 12px;
-  background: #f9f9f9;
-}
-
-.cdp-day-name {
-  text-align: center;
-  font-size: 12px;
-  color: #666;
-}
-
+.cdp-days-row,
 .cdp-cells-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 4px;
-  padding: 8px 12px 12px;
+  text-align: center;
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+.cdp-day-name {
+  font-weight: 500;
+  color: #888;
 }
 
 .cdp-cell {
-  text-align: center;
-  padding: 6px 0;
+  padding: 8px 0;
+  border-radius: 6px;
   cursor: pointer;
-  border-radius: 4px;
-  font-size: 14px;
-  color: #333;
+  transition: background-color 0.2s ease;
+  user-select: none;
 }
 
-.cdp-cell.blank {
-  cursor: default;
-  background: transparent;
+.cdp-cell:hover {
+  background-color: #e1f3ff;
 }
 
-.cdp-cell:hover:not(.blank) {
-  background: #e6f2ff;
+.cdp-cell.today {
+  border: 1px solid #0079bf;
+  color: #0079bf;
 }
 
 .cdp-cell.selected {
-  background: #4a90e2;
-  color: #fff;
+  background-color: #0079bf;
+  color: white;
+  font-weight: 600;
+}
+
+.cdp-cell.disabled {
+  color: #ccc;
+  pointer-events: none;
+  background-color: #f6f6f6;
+}
+
+.cdp-cell.blank {
+  visibility: hidden;
+}
+
+.cdp-time-picker {
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.cdp-time-picker label {
+  color: #333;
+  font-weight: 500;
+}
+
+.cdp-time-input {
+  padding: 6px 10px;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  transition: border 0.2s;
+}
+
+.cdp-time-input:focus {
+  outline: none;
+  border-color: #0079bf;
 }

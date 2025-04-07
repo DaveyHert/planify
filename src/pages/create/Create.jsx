@@ -80,8 +80,7 @@ function Create() {
         <div className='select-options'>
           <span>Project category:</span>{" "}
           <CustomSelectDropdown
-            options={["Frontend", "Backend", "Design", "Project management"]}
-            category={category}
+            options={categories}
             saveCategory={(option) => setCategory(option)}
           />
         </div>

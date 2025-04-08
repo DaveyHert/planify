@@ -1,11 +1,13 @@
 import { useState } from "react";
 import "./CustomSelectDropdown.css";
 
-const DropDown = ({ options, category, saveCategory }) => {
+const DropDown = ({ options, onOptChange }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [option, setOption] = useState("");
 
-  const handleSelectCategory = (option) => {
-    saveCategory(option);
+  const handleSelectOption = (option) => {
+    setOption(option.label);
+    onOptChange(option.value);
     setIsOpen((prev) => !prev);
   };
 
@@ -20,7 +22,7 @@ const DropDown = ({ options, category, saveCategory }) => {
             type='text'
             readOnly
             tabIndex='0'
-            value={category}
+            value={option}
             placeholder='Select category'
           />
           <span className={isOpen ? "active" : ""}>{">"}</span>
@@ -28,9 +30,9 @@ const DropDown = ({ options, category, saveCategory }) => {
 
         {isOpen && (
           <ul className='dropdown-items-wrapper'>
-            {options.map((option, indx) => (
-              <li key={indx} onClick={() => handleSelectCategory(option)}>
-                {option}
+            {options.map((item) => (
+              <li key={item.value} onClick={() => handleSelectOption(item)}>
+                {item.label}
               </li>
             ))}
           </ul>

@@ -81,7 +81,7 @@ function Create() {
           <span>Project category:</span>{" "}
           <CustomSelectDropdown
             options={categories}
-            saveCategory={(option) => setCategory(option)}
+            onOptChange={(option) => setCategory(option)}
           />
         </div>
 

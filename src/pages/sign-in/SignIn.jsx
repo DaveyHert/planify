@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useSignIn } from "../../hooks/useSignIn";
 import ProgressIcon from "../../components/ProgressIcon";
-import Error from "../../components/ErrorToast";
+import ErrorToast from "../../components/ErrorToast";
 
 function SignIn() {
   const emailRef = useRef(null);
@@ -57,8 +57,8 @@ function SignIn() {
           Sign In
         </button>
       </form>
-      {error && showError && <Error message={error} />}
-      {invalidInput && showError && <Error message={invalidInput} />}
+      {error && showError && <ErrorToast message={error} />}
+      {invalidInput && showError && <ErrorToast message={invalidInput} />}
       {isPending && <ProgressIcon />}
     </>
   );

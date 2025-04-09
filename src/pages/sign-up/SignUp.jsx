@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSignUp } from "../../hooks/useSignUp";
 import ProgressIcon from "../../components/ProgressIcon";
 import AvatarIcon from "../../assets/avatar-icon.svg";
-import Error from "../../components/ErrorToast";
+import ErrorToast from "../../components/ErrorToast";
 
 import "./SignUp.css";
 
@@ -151,8 +151,8 @@ function SignUp() {
       </form>
 
       {isPending && <ProgressIcon />}
-      {error && showError && <Error message={error} />}
-      {invalidInput && showError && <Error message={invalidInput} />}
+      {error && showError && <ErrorToast message={error} />}
+      {invalidInput && showError && <ErrorToast message={invalidInput} />}
     </>
   );
 }

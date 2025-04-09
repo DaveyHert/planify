@@ -1,12 +1,12 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import AssignUsers from "../../components/AssignUsers";
-import CustomSelectDropdown from "../../components/CustomSelectDropdown";
+// import CustomSelectDropdown from "../../components/CustomSelectDropdown";
 import CustomDatePicker from "../../components/CustomDatePicker";
 import Avatar from "../../components/Avatar";
 import Modal from "../../components/Modal";
 import "./Create.css";
 import Select from "react-select";
-import ErrorToast
+import ErrorToast from "../../components/ErrorToast";
 
 const categories = [
   { value: "development", label: "Development" },
@@ -22,8 +22,10 @@ function Create() {
   const [dueDate, setDueDate] = useState("");
   const [assignedUsers, setAssignedUsers] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const formRef = useRef();
   const [error, setError] = useState(null);
+  const [showError, setShowError] = useState(false);
+  const assignUsersRef = useRef();
+  const formRef = useRef();
 
   // Assigns project to users
   const assignToUser = (user) => {
@@ -47,8 +49,11 @@ function Create() {
   // handle category selection
   const handleSumit = (e) => {
     e.preventDefault();
-    console.log(formRef);
-    validateInput();
+    setError(null);
+
+    const valid = validateInput();
+    if (!valid) return;
+
     const projectData = {
       name,
       details,
@@ -62,10 +67,41 @@ function Create() {
   const validateInput = () => {
     if (!formRef.current[0].value) {
       setError("Title required!");
-      formRef.current[0].style.outline = "unset";
       return formRef.current[0].focus();
     }
+    if (!formRef.current[1].value) {
+      setError("Project details required!");
+      return formRef.current[1].focus();
+    }
+    if (!category) {
+      setError("Project category required!");
+      return formRef.current[2].focus();
+    }
+    if (!dueDate) {
+      setError("Set project due date!");
+      return formRef.current[3].focus();
+    }
+    if (assignedUsers.length === 0) {
+      setError("At least one user must be assigned");
+      assignUsersRef.current.classList.add("active");
+      return;
+    }
+
+    return "passed";
   };
+
+  // handle error toast
+  useEffect(() => {
+    if (error) {
+      setShowError(true);
+      let timer = setTimeout(() => {
+        setShowError(false);
+        setError(null);
+      }, 3000);
+
+      return () => clearTimeout(timer); // cleanup timer on unmount
+    }
+  }, [error]);
 
   return (
     <div className='create-form'>
@@ -78,7 +114,6 @@ function Create() {
             type='text'
             value={name}
             onChange={(e) => setName(e.target.value)}
-            required
           />
         </label>
 
@@ -88,7 +123,6 @@ function Create() {
             type='text'
             value={details}
             onChange={(e) => setDetails(e.target.value)}
-            required
           ></textarea>
         </label>
 
@@ -142,6 +176,7 @@ function Create() {
             <li
               className={`assign-user-icon ${showModal ? "active" : ""}`}
               onClick={() => setShowModal(true)}
+              ref={assignUsersRef}
             >
               +
             </li>
@@ -150,6 +185,7 @@ function Create() {
 
         <button className='btn'>Add Project</button>
       </form>
+      {showError && <ErrorToast message={error} />}
     </div>
   );
 }

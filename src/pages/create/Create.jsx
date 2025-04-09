@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import AssignUsers from "../../components/AssignUsers";
 import CustomSelectDropdown from "../../components/CustomSelectDropdown";
 import CustomDatePicker from "../../components/CustomDatePicker";
@@ -6,6 +6,7 @@ import Avatar from "../../components/Avatar";
 import Modal from "../../components/Modal";
 import "./Create.css";
 import Select from "react-select";
+import ErrorToast
 
 const categories = [
   { value: "development", label: "Development" },
@@ -21,6 +22,8 @@ function Create() {
   const [dueDate, setDueDate] = useState("");
   const [assignedUsers, setAssignedUsers] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const formRef = useRef();
+  const [error, setError] = useState(null);
 
   // Assigns project to users
   const assignToUser = (user) => {
@@ -42,9 +45,10 @@ function Create() {
   };
 
   // handle category selection
-
   const handleSumit = (e) => {
     e.preventDefault();
+    console.log(formRef);
+    validateInput();
     const projectData = {
       name,
       details,
@@ -55,17 +59,26 @@ function Create() {
     console.log(projectData);
   };
 
+  const validateInput = () => {
+    if (!formRef.current[0].value) {
+      setError("Title required!");
+      formRef.current[0].style.outline = "unset";
+      return formRef.current[0].focus();
+    }
+  };
+
   return (
     <div className='create-form'>
       <h2 className='page-title'>Create a new project</h2>
 
-      <form onSubmit={handleSumit}>
+      <form onSubmit={handleSumit} ref={formRef}>
         <label>
           <span>Project name:</span>
           <input
             type='text'
             value={name}
             onChange={(e) => setName(e.target.value)}
+            required
           />
         </label>
 
@@ -75,6 +88,7 @@ function Create() {
             type='text'
             value={details}
             onChange={(e) => setDetails(e.target.value)}
+            required
           ></textarea>
         </label>
 

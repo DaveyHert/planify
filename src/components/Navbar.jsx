@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useLogout } from "../hooks/useLogout";
 import Logo from "../assets/logo.svg";
-import Error from "./ErrorToast";
+import ErrorToast from "./ErrorToast";
 import "./Navbar.css";
 
 function Navbar() {
@@ -50,7 +50,7 @@ function Navbar() {
           </>
         )}
       </ul>
-      {error && <Error message={error} />}
+      {error && <ErrorToast message={error} />}
     </nav>
   );
 }

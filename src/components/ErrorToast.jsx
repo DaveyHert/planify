@@ -1,6 +1,6 @@
 import "./ErrorToast.css";
 
-function Error({ message }) {
+function ErrorToast({ message }) {
   return (
     <div className='error-toast'>
       <p>{message}</p>
@@ -9,4 +9,4 @@ function Error({ message }) {
   );
 }
 
-export default Error;
+export default ErrorToast;

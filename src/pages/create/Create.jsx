@@ -5,9 +5,8 @@ import CustomDatePicker from "../../components/CustomDatePicker";
 import Avatar from "../../components/Avatar";
 import Modal from "../../components/Modal";
 import "./Create.css";
-import Select from "react-select";
 import ErrorToast from "../../components/ErrorToast";
-import CustomDate from "../../components/CustomDate.jsx";
+import CustomDate from "../../components/CustomDate";
 
 const categories = [
   { value: "development", label: "Development" },
@@ -132,10 +131,6 @@ function Create() {
           <CustomSelectDropdown
             options={categories}
             onOptChange={(option) => setCategory(option)}
-          />
-          <Select
-            options={categories}
-            onChange={(option) => setCategory(option)}
           />
         </div>
 

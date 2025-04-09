@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
-import PropTypes from "prop-types";
+
 import "./CustomDate.css";
+
 const CustomDate = ({ value, onChange, placeholder = "Select date" }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(
@@ -160,12 +161,6 @@ const CustomDate = ({ value, onChange, placeholder = "Select date" }) => {
       )}
     </div>
   );
-};
-
-CustomDate.propTypes = {
-  value: PropTypes.instanceOf(Date),
-  onChange: PropTypes.func.isRequired,
-  placeholder: PropTypes.string,
 };
 
 export default CustomDate;

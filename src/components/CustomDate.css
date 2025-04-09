@@ -50,6 +50,7 @@
 }
 .calendar-header button:hover {
   background: #ccc;
+  color: white;
 }
 
 .calendar-grid {

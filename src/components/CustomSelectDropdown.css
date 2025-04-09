@@ -1,13 +1,13 @@
 .dropdown {
   position: relative;
-  width: fit-content;
+  width: 100%;
   color: var(--text-normal);
 }
 
 .dropdown-trigger {
   display: inline-flex;
   align-items: center;
-  width: 14rem;
+  width: 100%;
   font-size: 1rem;
   font-weight: 300;
   border-radius: 4px;
@@ -41,7 +41,8 @@
   cursor: pointer;
   padding: 0;
   margin: 0;
-  color: var(--text-normal);
+  color: var(--bg-main);
+  font-size: 15px;
 }
 
 .dropdown-items-wrapper {
@@ -63,8 +64,10 @@
 
 .dropdown-items-wrapper li:hover {
   background-color: #f1f2f4;
+  background-color: var(--primary-color-light);
+  color: white;
   cursor: pointer;
-  color: #172b4d;
+  /* color: var(--primary-color); */
 }
 
 .dropdown-trigger input::placeholder {

@@ -1,9 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./CustomSelectDropdown.css";
 
 const DropDown = ({ options, onOptChange }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [option, setOption] = useState("");
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const handleSelectOption = (option) => {
     setOption(option.label);
@@ -13,23 +26,23 @@ const DropDown = ({ options, onOptChange }) => {
 
   return (
     <>
-      <div className='dropdown'>
+      <div className="dropdown" ref={dropdownRef}>
         <div
-          className='dropdown-trigger'
+          className="dropdown-trigger"
           onClick={() => setIsOpen((prev) => !prev)}
         >
           <input
-            type='text'
+            type="text"
             readOnly
-            tabIndex='0'
+            tabIndex="0"
             value={option}
-            placeholder='Select category'
+            placeholder="Select category"
           />
           <span className={isOpen ? "active" : ""}>{">"}</span>
         </div>
 
         {isOpen && (
-          <ul className='dropdown-items-wrapper'>
+          <ul className="dropdown-items-wrapper">
             {options.map((item) => (
               <li key={item.value} onClick={() => handleSelectOption(item)}>
                 {item.label}

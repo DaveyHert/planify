@@ -22,8 +22,8 @@ export default function CustomDatePicker({
         setShowCalendar(false);
       }
     }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    window.addEventListener("click", handleClickOutside);
+    return () => window.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const getDaysInMonth = (year, month) =>

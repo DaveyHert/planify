@@ -9,16 +9,10 @@ export default function AssignUsers({ handleAssignToUser, closeModal }) {
   const [search, setSearch] = useState("");
   const searchRef = useRef();
 
-  //   handle user selection
-  const handleClick = (user) => {
-    handleAssignToUser(user);
-  };
-
   // handle user search
   // Memoize the filtered list so it only recalculates when users data or search term changes
   const filteredUsers = useMemo(() => {
     if (!users) return [];
-
     let term = search.trim().toLowerCase();
     if (term === "") return users; // if no search return data as is
 
@@ -70,7 +64,7 @@ export default function AssignUsers({ handleAssignToUser, closeModal }) {
             <div
               key={user.id}
               className={`users-list-item ${user.online ? "online" : ""}`}
-              onClick={() => handleClick(user)}
+              onClick={() => handleAssignToUser(user)}
             >
               <Avatar src={user.photoURL} />
               <span>{user.displayName}</span>

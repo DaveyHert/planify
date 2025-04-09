@@ -1,12 +1,13 @@
 import { useRef, useState, useEffect } from "react";
 import AssignUsers from "../../components/AssignUsers";
-// import CustomSelectDropdown from "../../components/CustomSelectDropdown";
+import CustomSelectDropdown from "../../components/CustomSelectDropdown";
 import CustomDatePicker from "../../components/CustomDatePicker";
 import Avatar from "../../components/Avatar";
 import Modal from "../../components/Modal";
 import "./Create.css";
 import Select from "react-select";
 import ErrorToast from "../../components/ErrorToast";
+import CustomDate from "../../components/CustomDate.jsx";
 
 const categories = [
   { value: "development", label: "Development" },
@@ -104,14 +105,14 @@ function Create() {
   }, [error]);
 
   return (
-    <div className='create-form'>
-      <h2 className='page-title'>Create a new project</h2>
+    <div className="create-form">
+      <h2 className="page-title">Create a new project</h2>
 
       <form onSubmit={handleSumit} ref={formRef}>
         <label>
           <span>Project name:</span>
           <input
-            type='text'
+            type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
@@ -120,37 +121,45 @@ function Create() {
         <label>
           <span>Project details:</span>
           <textarea
-            type='text'
+            type="text"
             value={details}
             onChange={(e) => setDetails(e.target.value)}
           ></textarea>
         </label>
 
-        <div className='select-options'>
+        <div className="select-options">
           <span>Project category:</span> {/* custom made select dropdown */}
-          {/* <CustomSelectDropdown
+          <CustomSelectDropdown
             options={categories}
             onOptChange={(option) => setCategory(option)}
-          /> */}
+          />
           <Select
             options={categories}
             onChange={(option) => setCategory(option)}
           />
         </div>
 
-        <div className='date-picker'>
+        <div className="date-picker">
           <span>Set due date:</span>
           <CustomDatePicker
-            placeholder='Select due date'
+            placeholder="Select due date"
             selectedDate={dueDate}
             onDateChange={setDueDate}
+          />
+        </div>
+        <div className="date-picker">
+          <span>Set due date:</span>
+          <CustomDate
+            value={dueDate}
+            onChange={setDueDate}
+            placeholder="Select due date"
           />
         </div>
 
         <label>
           <span>Assign to:</span>
           {showModal && (
-            <Modal type='no-style' onClose={closeModal}>
+            <Modal type="no-style" onClose={closeModal}>
               <AssignUsers
                 handleAssignToUser={assignToUser}
                 closeModal={closeModal}
@@ -158,14 +167,14 @@ function Create() {
             </Modal>
           )}
 
-          <ul className='assigned-list'>
+          <ul className="assigned-list">
             {assignedUsers &&
               assignedUsers.map((user) => (
                 <li key={user.id} data-user-name={user.displayName}>
                   <Avatar src={user.photoURL} />
                   <span
-                    className='delete'
-                    title='remove'
+                    className="delete"
+                    title="remove"
                     onClick={() => handleRemoveUser(user)}
                   >
                     -
@@ -183,7 +192,7 @@ function Create() {
           </ul>
         </label>
 
-        <button className='btn'>Add Project</button>
+        <button className="btn">Add Project</button>
       </form>
       {showError && <ErrorToast message={error} />}
     </div>

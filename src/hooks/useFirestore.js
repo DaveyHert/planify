@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { firestoreDB, timestamp } from "../firebase/config";
+import { firestoreDB, createTimeStamp } from "../firebase/config";
 import { useFirestoreContext } from "./useFirestoreContext";
 import {
   addDoc,
@@ -75,7 +75,7 @@ export function useFirestore(uid, sortBy) {
   const addDocument = async (newDoc) => {
     const colRef = collection(firestoreDB, "users", uid, "transactions");
     // Add time stamp
-    const createdAt = timestamp.fromDate(new Date());
+    const createdAt = createTimeStamp.now();
 
     try {
       await addDoc(colRef, { ...newDoc, createdAt });

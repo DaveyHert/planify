@@ -16,6 +16,7 @@ export function useDocument(collectionName, docId) {
     const unsub = onSnapshot(
       docRef,
       (doc) => {
+        console.log(doc);
         if (doc.exists()) {
           setData({ id: doc.id, ...doc.data() });
           setIsPending(false);

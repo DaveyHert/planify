@@ -108,6 +108,13 @@
   visibility: visible;
   opacity: 1;
 }
+.project-summary .avatar-wrapper {
+  width: 55px;
+  height: 55px;
+}
+.project-summary .avatar-wrapper::after {
+  display: none;
+}
 
 .project-summary + .btn {
   margin-top: 20px;

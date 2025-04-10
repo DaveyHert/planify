@@ -38,7 +38,8 @@ function Create() {
   // Assigns project to users
   const assignToUser = (user) => {
     if (!assignedUsers.some((u) => u.id === user.id)) {
-      setAssignedUsers((prevUsers) => [...prevUsers, user]);
+      const { online, ...newUserData } = user; // Remove online property from user object using rest operator
+      setAssignedUsers((prevUsers) => [...prevUsers, newUserData]);
     } // prevent duplicate
 
     closeModal();

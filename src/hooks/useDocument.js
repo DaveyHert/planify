@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { firestoreDB } from "../firebase/config";
 
 export function useDocument(collectionName, docId) {
@@ -10,23 +10,27 @@ export function useDocument(collectionName, docId) {
   useEffect(() => {
     if (!collectionName || !docId) return;
 
-    const fetchDocument = async () => {
-      try {
-        const docRef = doc(firestoreDB, collectionName, docId);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          setData({ id: docSnap.id, ...docSnap.data() });
+    setError(null);
+    const docRef = doc(firestoreDB, collectionName, docId);
+
+    const unsub = onSnapshot(
+      docRef,
+      (doc) => {
+        if (doc.exists()) {
+          setData({ id: doc.id, ...doc.data() });
+          setIsPending(false);
         } else {
-          throw new Error("Document not found");
+          setError("project not found");
+          setIsPending(false);
         }
-      } catch (err) {
+      },
+      (err) => {
         setError(err.message);
-      } finally {
         setIsPending(false);
       }
-    };
+    );
 
-    fetchDocument();
+    return () => unsub(); //cleanup function
   }, [collectionName, docId]);
 
   return { data, isPending, error };

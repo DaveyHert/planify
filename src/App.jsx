@@ -28,27 +28,27 @@ function App() {
   return (
     authIsReady && (
       <>
-        <div className='App'>
+        <div className="App">
           {showSidebar && user && <Sidebar />}
-          <div className='container'>
+          <div className="container">
             {currentlocation !== "/" && <Navbar />}
             <Routes>
               {/* Protected Routes: Only accessible if logged in */}
               <Route element={<ProtectedRoutes />}>
-                <Route path='/dashboard' element={<Dashboard />} />
-                <Route path='/project/:id' element={<Project />} />
-                <Route path='/create' element={<Create />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/projects/:id" element={<Project />} />
+                <Route path="/create" element={<Create />} />
               </Route>
 
               {/* Public Routes: Only accessible if NOT logged in */}
               <Route element={<PublicRoutes />}>
-                <Route path='/' element={<Home />} />
-                <Route path='/sign-in' element={<SignIn />} />
-                <Route path='/sign-up' element={<SignUp />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/sign-in" element={<SignIn />} />
+                <Route path="/sign-up" element={<SignUp />} />
               </Route>
 
               {/* General Routes: Accessible to anyone */}
-              <Route path='*' element={<p>Page not found</p>} />
+              <Route path="*" element={<p>Page not found</p>} />
             </Routes>
           </div>
           {user && <OnlineUsers />}

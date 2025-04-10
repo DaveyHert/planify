@@ -1,6 +1,15 @@
-/* .project-filter {
-    margin: 30px auto;
-  } */
+.dashboard {
+  padding: 60px;
+}
+
+.dashboard .container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.project-filter {
+  margin: 30px auto;
+}
 .project-filter nav {
   display: flex;
   padding: 10px;

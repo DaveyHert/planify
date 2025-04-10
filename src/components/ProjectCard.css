@@ -1,0 +1,54 @@
+.project-card {
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 6px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.05);
+  text-decoration: none;
+  color: inherit;
+}
+
+.project-card a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.project-card .due-date {
+  color: var(--text-color);
+  font-size: 0.8em;
+}
+
+.project-card h4 {
+  font-size: 0.9em;
+  color: var(--heading-color);
+}
+
+.project-card p {
+  color: var(--text-color);
+  font-size: 0.9em;
+}
+
+.project-card .assigned-to {
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+  letter-spacing: 0.5px;
+  font-weight: 300;
+}
+
+.project-card ul {
+  margin: 10px 0;
+  display: flex;
+}
+
+.project-card li {
+  margin-right: 10px;
+}
+
+.project-card .avatar-wrapper {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+}
+.project-card .avatar-wrapper::after {
+  display: none;
+}

@@ -1,18 +1,21 @@
 import { useState } from "react";
-import { collection, addDoc, Timestamp } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 import { firestoreDB } from "../firebase/config";
 
 export function useAddDocument(collectionName) {
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(null);
+  const [response, setResponse] = useState(null);
 
   const addItem = async (newItem) => {
     setIsPending(true);
     setError(null);
+    setResponse(null);
 
     try {
       const colRef = collection(firestoreDB, collectionName);
-      await addDoc(colRef, { ...newItem, createdAt: Timestamp.now() });
+      const res = await addDoc(colRef, newItem);
+      setResponse(res);
       setIsPending(false);
     } catch (err) {
       setError(err.message);
@@ -20,5 +23,5 @@ export function useAddDocument(collectionName) {
     }
   };
 
-  return { addItem, isPending, error };
+  return { addItem, isPending, error, response };
 }

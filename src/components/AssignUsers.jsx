@@ -38,24 +38,24 @@ export default function AssignUsers({ handleAssignToUser, closeModal }) {
   }, []);
 
   return (
-    <div className='users-list'>
+    <div className="users-list">
       <section>
         <h3>Assign User</h3>
-        <span className='close-modal' onClick={() => closeModal()}>
+        <span className="close-modal" onClick={() => closeModal()}>
           &#10005;
         </span>
       </section>
 
-      <div className='users-list-content'>
-        {error && <div className='error'>{error}</div>}
+      <div className="users-list-content">
+        {error && <div className="error">{error}</div>}
         {isPending && <ProgressIcon />}
 
         <input
-          type='text'
-          className='user-search'
+          type="text"
+          className="user-search"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder='Search members...'
+          placeholder="Search members..."
           ref={searchRef}
         />
 
@@ -73,7 +73,7 @@ export default function AssignUsers({ handleAssignToUser, closeModal }) {
 
         {/* Optionally show a “no results” message */}
         {!isPending && filteredUsers.length === 0 && (
-          <div className='no-results'>No users found!</div>
+          <div className="no-results">No users found!</div>
         )}
       </div>
     </div>

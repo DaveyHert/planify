@@ -3,7 +3,7 @@ import { collection, onSnapshot } from "firebase/firestore";
 import { firestoreDB } from "../firebase/config";
 
 export function useCollection(collectionName) {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(null);
 
@@ -13,7 +13,7 @@ export function useCollection(collectionName) {
     // reset states
     setIsPending(true);
     setError(null);
-    setData(null);
+    setData([]);
 
     // Get all documents in collection
     const colRef = collection(firestoreDB, collectionName);
@@ -22,7 +22,7 @@ export function useCollection(collectionName) {
       (snapshot) => {
         // verify snapshot isn't empty
         if (snapshot.empty) {
-          setError(`No ${collectionName} available`);
+          setError(`No ${collectionName} available yet`);
           setIsPending(false);
           return; // Prevent further execution
         }

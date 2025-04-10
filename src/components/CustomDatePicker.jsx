@@ -1,44 +1,79 @@
 import React, { useState, useRef, useEffect } from "react";
+
 import "./CustomDatePicker.css";
 
-export default function CustomDatePicker({
-  selectedDate,
-  onDateChange,
-  placeholder = "Select date",
-}) {
-  const [showCalendar, setShowCalendar] = useState(false);
-  const [currentMonth, setCurrentMonth] = useState(() => {
-    const today = new Date();
-    return new Date(today.getFullYear(), today.getMonth(), 1);
-  });
-  const [date, setDate] = useState(selectedDate || null);
-  const [time, setTime] = useState("12:00");
-  const wrapperRef = useRef(null);
+const CustomDatePicker = ({ value, onChange, placeholder = "Select date" }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(
+    value ? new Date(value) : null
+  );
+  const [currentMonth, setCurrentMonth] = useState(selectedDate || new Date());
+  const [selectedTime, setSelectedTime] = useState("12:00");
+  const datePickerRef = useRef(null);
   const today = new Date();
+  today.setHours(0, 0, 0, 0);
 
   useEffect(() => {
-    function handleClickOutside(event) {
-      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-        setShowCalendar(false);
+    const handleClickOutside = (event) => {
+      if (
+        datePickerRef.current &&
+        !datePickerRef.current.contains(event.target)
+      ) {
+        setIsOpen(false);
       }
-    }
-    window.addEventListener("click", handleClickOutside);
-    return () => window.removeEventListener("mousedown", handleClickOutside);
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const getDaysInMonth = (year, month) =>
-    new Date(year, month + 1, 0).getDate();
-  const getFirstDayOfWeek = (year, month) => new Date(year, month, 1).getDay();
+  const getDaysInMonth = (date) => {
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    const daysInMonth = lastDay.getDate();
+    const startingDay = firstDay.getDay();
+
+    const days = [];
+    // Add empty cells for days before the first day of the month
+    for (let i = 0; i < startingDay; i++) {
+      days.push(null);
+    }
+
+    // Add days of the month
+    for (let i = 1; i <= daysInMonth; i++) {
+      days.push(new Date(year, month, i));
+    }
+
+    return days;
+  };
+
+  const handleDateSelect = (date) => {
+    if (date < today) return;
+
+    const [hours, minutes] = selectedTime.split(":");
+    date.setHours(parseInt(hours), parseInt(minutes), 0);
+    setSelectedDate(date);
+    onChange(date);
+    setIsOpen(false);
+  };
+
+  const handleTimeChange = (e) => {
+    setSelectedTime(e.target.value);
+    if (selectedDate) {
+      const [hours, minutes] = e.target.value.split(":");
+      const newDate = new Date(selectedDate);
+      newDate.setHours(parseInt(hours), parseInt(minutes), 0);
+      onChange(newDate);
+    }
+  };
 
   const handlePrevMonth = (e) => {
     e.preventDefault();
-    const prevMonth = new Date(
-      currentMonth.getFullYear(),
-      currentMonth.getMonth() - 1,
-      1
+    setCurrentMonth(
+      new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1)
     );
-    if (prevMonth < new Date(today.getFullYear(), today.getMonth(), 1)) return;
-    setCurrentMonth(prevMonth);
   };
 
   const handleNextMonth = (e) => {
@@ -48,131 +83,86 @@ export default function CustomDatePicker({
     );
   };
 
-  const handleDateClick = (day) => {
-    const combinedDate = new Date(day);
-    const [hours, minutes] = time.split(":");
-    combinedDate.setHours(parseInt(hours));
-    combinedDate.setMinutes(parseInt(minutes));
-    setDate(combinedDate);
-    onDateChange && onDateChange(combinedDate);
-    setShowCalendar(false);
+  const formatDate = (date) => {
+    if (!date) return "";
+    return `${date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    })} ${selectedTime}`;
   };
 
-  const handleTimeChange = (e) => {
-    e.preventDefault();
-    const newTime = e.target.value;
-    setTime(newTime);
-    if (date) {
-      const newDate = new Date(date);
-      const [hours, minutes] = newTime.split(":");
-      newDate.setHours(parseInt(hours));
-      newDate.setMinutes(parseInt(minutes));
-      setDate(newDate);
-      onDateChange && onDateChange(newDate);
-    }
-  };
-
-  const formatDate = (d) => {
-    if (!d) return "";
-    const mm = String(d.getMonth() + 1).padStart(2, "0");
-    const dd = String(d.getDate()).padStart(2, "0");
-    const hh = String(d.getHours()).padStart(2, "0");
-    const mins = String(d.getMinutes()).padStart(2, "0");
-    return `${d.getFullYear()}-${mm}-${dd} ${hh}:${mins}`;
-  };
-
-  const renderHeader = () => (
-    <div className='cdp-header'>
-      <button onClick={handlePrevMonth} className='cdp-nav'>
-        ‹
-      </button>
-      <div className='cdp-month'>
-        {currentMonth.toLocaleString("default", { month: "long" })}{" "}
-        {currentMonth.getFullYear()}
-      </div>
-      <button onClick={handleNextMonth} className='cdp-nav'>
-        ›
-      </button>
-    </div>
-  );
-
-  const renderDays = () => {
-    const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    return (
-      <div className='cdp-days-row'>
-        {weekDays.map((d) => (
-          <div key={d} className='cdp-day-name'>
-            {d}
-          </div>
-        ))}
-      </div>
-    );
-  };
-
-  const renderCells = () => {
-    const year = currentMonth.getFullYear();
-    const month = currentMonth.getMonth();
-    const totalDays = getDaysInMonth(year, month);
-    const startDay = getFirstDayOfWeek(year, month);
-    const cells = [];
-
-    for (let i = 0; i < startDay; i++) {
-      cells.push(<div key={`blank-${i}`} className='cdp-cell blank'></div>);
-    }
-
-    for (let day = 1; day <= totalDays; day++) {
-      const cellDate = new Date(year, month, day);
-      const isToday = cellDate.toDateString() === today.toDateString();
-      const isSelected =
-        date && cellDate.toDateString() === date.toDateString();
-      const isPast =
-        cellDate <
-        new Date(today.getFullYear(), today.getMonth(), today.getDate());
-
-      cells.push(
-        <div
-          key={day}
-          className={`cdp-cell 
-            ${isToday ? "today" : ""} 
-            ${isSelected ? "selected" : ""} 
-            ${isPast ? "disabled" : ""}`}
-          onClick={() => !isPast && handleDateClick(cellDate)}
-        >
-          {day}
-        </div>
-      );
-    }
-
-    return <div className='cdp-cells-grid'>{cells}</div>;
-  };
+  const days = getDaysInMonth(currentMonth);
+  const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   return (
-    <div className='cdp-wrapper' ref={wrapperRef}>
-      <input
-        type='text'
-        readOnly
-        className='cdp-input'
-        placeholder={placeholder}
-        value={formatDate(date)}
-        onClick={() => setShowCalendar(!showCalendar)}
-      />
-      {showCalendar && (
-        <div className='cdp-calendar'>
-          {renderHeader()}
-          {renderDays()}
-          {renderCells()}
-          <div className='cdp-time-picker'>
-            <label htmlFor='cdp-time'>Time: </label>
+    <div className="custom-date-picker" ref={datePickerRef}>
+      <div
+        className={`date-input ${isOpen ? "open" : ""}`}
+        onClick={() => setIsOpen(!isOpen)}
+        role="button"
+        tabIndex={0}
+      >
+        {selectedDate ? formatDate(selectedDate) : placeholder}
+        <span className="icon">{">"}</span>
+      </div>
+
+      {isOpen && (
+        <div className="calendar-popup">
+          <div className="calendar-header">
+            <button onClick={handlePrevMonth}>‹</button>
+            <span>
+              {currentMonth.toLocaleDateString("en-US", {
+                month: "long",
+                year: "numeric",
+              })}
+            </span>
+            <button onClick={handleNextMonth}>›</button>
+          </div>
+
+          <div className="calendar-grid">
+            {weekDays.map((day) => (
+              <div key={day} className="week-day">
+                {day}
+              </div>
+            ))}
+
+            {days.map((day, index) => (
+              <div
+                key={index}
+                className={`calendar-day ${
+                  day &&
+                  selectedDate &&
+                  day.toDateString() === selectedDate.toDateString()
+                    ? "selected"
+                    : ""
+                } ${
+                  day && day.toDateString() === today.toDateString()
+                    ? "today"
+                    : ""
+                } ${!day ? "empty" : ""} ${
+                  day && day < today ? "disabled" : ""
+                }`}
+                onClick={() => day && handleDateSelect(day)}
+              >
+                {day ? day.getDate() : ""}
+              </div>
+            ))}
+          </div>
+
+          <div className="time-picker">
+            <span>Time:</span>
             <input
-              id='cdp-time'
-              type='time'
-              className='cdp-time-input'
-              value={time}
+              type="time"
+              value={selectedTime}
               onChange={handleTimeChange}
+              className="time-input"
             />
           </div>
         </div>
       )}
     </div>
   );
-}
+};
+
+export default CustomDatePicker;

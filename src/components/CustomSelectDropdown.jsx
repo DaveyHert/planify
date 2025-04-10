@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import "./CustomSelectDropdown.css";
 
-const DropDown = ({ options, onOptChange }) => {
+const CustomSelectDropDown = ({ options, onOptChange }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [option, setOption] = useState("");
-  const dropdownRef = useRef(null);
+  const [selectedOption, setSelectedOption] = useState("");
 
+  const dropdownRef = useRef(null);
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -19,7 +19,7 @@ const DropDown = ({ options, onOptChange }) => {
   }, []);
 
   const handleSelectOption = (option) => {
-    setOption(option.label);
+    setSelectedOption(option.label);
     onOptChange(option.value);
     setIsOpen((prev) => !prev);
   };
@@ -35,7 +35,7 @@ const DropDown = ({ options, onOptChange }) => {
             type="text"
             readOnly
             tabIndex="0"
-            value={option}
+            value={selectedOption}
             placeholder="Select category"
           />
           <span className={isOpen ? "active" : ""}>{">"}</span>
@@ -44,7 +44,15 @@ const DropDown = ({ options, onOptChange }) => {
         {isOpen && (
           <ul className="dropdown-items-wrapper">
             {options.map((item) => (
-              <li key={item.value} onClick={() => handleSelectOption(item)}>
+              <li
+                key={item.value}
+                className={
+                  selectedOption && selectedOption === item.label
+                    ? "selected"
+                    : ""
+                }
+                onClick={() => handleSelectOption(item)}
+              >
                 {item.label}
               </li>
             ))}
@@ -55,4 +63,4 @@ const DropDown = ({ options, onOptChange }) => {
   );
 };
 
-export default DropDown;
+export default CustomSelectDropDown;

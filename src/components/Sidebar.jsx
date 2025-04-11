@@ -41,7 +41,7 @@ export default function Sidebar() {
             <Avatar src={user.photoURL} />
             <p>Hey {user.displayName}</p>
           </div>
-          <NavLinks />
+          <NavLinks toggleSidebar={toggleSidebar} />
         </div>
       </div>
     </>

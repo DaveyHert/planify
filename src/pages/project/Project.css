@@ -1,5 +1,6 @@
 .project-details.container {
   max-width: 1200px;
+  /* width: 100%; */
   margin: 0 auto;
 }
 
@@ -236,17 +237,24 @@
   .project-summary .due-date {
     margin-right: 1em;
   }
-
-  /* .project-comments {
-    width: 95%;
-    margin: 0 auto;
-  } */
 }
 
-.add-comment .progress-icon {
-  width: 30px;
-  height: 30px;
-  animation: loading 0.6s linear infinite running;
-  position: relative;
-  transform: unset;
+@media (max-width: 500px) {
+  .project-summary {
+    padding: 20px;
+  }
+  .project-summary .project-info {
+    flex-wrap: wrap;
+  }
+  .project-summary .project-info .label {
+    margin-top: 10px;
+  }
+
+  .add-comment .progress-icon {
+    width: 30px;
+    height: 30px;
+    animation: loading 0.6s linear infinite running;
+    position: relative;
+    transform: unset;
+  }
 }

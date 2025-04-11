@@ -153,7 +153,7 @@ function Create() {
         </label>
 
         <div className="select-options">
-          <span>Project category:</span> {/* custom made select dropdown */}
+          <span>Project category:</span>
           <CustomSelectDropdown
             options={categories}
             onOptChange={(option) => setCategory(option)}

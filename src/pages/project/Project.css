@@ -18,10 +18,10 @@
 }
 .project-summary .due-date {
   margin: 10px 0;
-  font-size: 0.9em;
+
   color: var(--title-color);
 }
-.project-summary .due-date span {
+.project-summary .project-info .due-date span {
   background-color: var(--wood-brown);
   padding: 4px 8px;
   border-radius: 4px;
@@ -29,7 +29,48 @@
   font-size: 0.8em;
   color: var(--text-main);
   user-select: none;
+  white-space: nowrap;
 }
+
+.project-summary .project-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: clamp(0.75rem, 2vw, 0.9rem);
+}
+
+.project-summary .project-info .label {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background-color: var(--primary-color-light);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8em;
+  color: var(--text-main);
+  user-select: none;
+}
+
+.project-summary .project-info .label img {
+  width: 16px;
+  height: 16px;
+}
+
+.project-summary .project-info .created-by {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  position: relative;
+  cursor: default;
+}
+.project-summary .project-info .created-by .avatar-wrapper {
+  width: 35px;
+  height: 35px;
+  border: 1px solid var(--wood-brown);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
 .project-summary .page-title {
   font-size: clamp(1.4rem, 4vw, 2rem);
   font-weight: 800;
@@ -82,11 +123,13 @@
 }
 
 /* Hover tooltip with user's name */
-.project-summary .assigned-users div[data-user-name] {
+.project-summary .assigned-users div[data-user-name],
+.project-summary .created-by {
   position: relative;
   cursor: pointer;
 }
-.project-summary .assigned-users div[data-user-name]::after {
+.project-summary .assigned-users div[data-user-name]::after,
+.project-summary .created-by::after {
   content: attr(data-user-name);
   position: absolute;
   top: -25px;
@@ -104,7 +147,12 @@
   visibility: hidden;
 }
 
-.project-summary .assigned-users div[data-user-name]:hover::after {
+.project-summary .created-by::after {
+  top: -35px;
+  left: 65%;
+}
+.project-summary .assigned-users div[data-user-name]:hover::after,
+.project-summary .created-by:has(.avatar-wrapper:hover)::after {
   visibility: visible;
   opacity: 1;
 }
@@ -159,4 +207,24 @@
 .comment-content {
   color: var(--text-color);
   font-size: 0.9em;
+}
+
+@media (max-width: 1024px) {
+  .project-details {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .project-details {
+    grid-template-columns: 1fr;
+  }
+  .project-summary .created-by {
+    margin-bottom: 10px;
+  }
+
+  .project-summary .project-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

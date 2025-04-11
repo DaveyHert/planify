@@ -61,3 +61,31 @@
   margin-right: 10px;
   font-size: 1rem;
 }
+
+@media screen and (max-width: 768px) {
+  .navbar ul {
+    justify-content: center;
+    position: relative;
+  }
+  .navbar .logo {
+    margin-right: 0;
+  }
+
+  .navbar .name,
+  .navbar .btn {
+    display: none;
+  }
+  .navbar .mobile-logout {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  .navbar .mobile-logout:hover {
+    opacity: 0.8;
+  }
+  .navbar .mobile-logout:active {
+    scale: 1.1;
+  }
+}

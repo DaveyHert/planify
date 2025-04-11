@@ -1,6 +1,7 @@
+import { useAuthContext } from "../../hooks/useAuthContext";
 import "./Project.css";
 import Avatar from "../../components/Avatar";
-import { useAuthContext } from "../../hooks/useAuthContext";
+import LabelIcon from "../../assets/label-icon.svg";
 
 export default function ProjectSummary({ project }) {
   const { user } = useAuthContext();
@@ -9,9 +10,21 @@ export default function ProjectSummary({ project }) {
     <div>
       <div className="project-summary">
         <h2 className="page-title">{project.name}</h2>
-        <p className="due-date">
-          Project due by<span>{project.dueDate.toDate().toDateString()}</span>
-        </p>
+        <div className="project-info">
+          <p className="due-date">
+            Project due by<span>{project.dueDate.toDate().toDateString()}</span>
+          </p>
+          <span
+            className="created-by"
+            data-user-name={project.createdBy.displayName}
+          >
+            Created by <Avatar src={user.photoURL} />
+          </span>
+          <div className="label">
+            <img src={LabelIcon} alt="label" />
+            <span>{project.category}</span>
+          </div>
+        </div>
         <p className="details">{project.details}</p>
         <h4>Project assigned to:</h4>
         <div className="assigned-users">

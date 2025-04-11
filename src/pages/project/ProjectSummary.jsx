@@ -12,14 +12,15 @@ export default function ProjectSummary({ project }) {
         <h2 className="page-title">{project.name}</h2>
         <div className="project-info">
           <p className="due-date">
-            Project due by<span>{project.dueDate.toDate().toDateString()}</span>
+            Due date<span>{project.dueDate.toDate().toDateString()}</span>
           </p>
-          <span
+
+          <div
             className="created-by"
             data-user-name={project.createdBy.displayName}
           >
             Created by <Avatar src={user.photoURL} />
-          </span>
+          </div>
           <div className="label">
             <img src={LabelIcon} alt="label" />
             <span>{project.category}</span>

@@ -18,7 +18,6 @@ function SignUp() {
   });
 
   const handleAvatarChange = (e) => {
-    console.log(e);
     const imageFile = e.target.files[0];
 
     // Verify image is selected
@@ -96,13 +95,13 @@ function SignUp() {
   // Page jsx
   return (
     <>
-      <form className='auth-form' onSubmit={handleSignUp}>
-        <h2 className='page-title'>Sign Up</h2>
+      <form className="auth-form" onSubmit={handleSignUp}>
+        <h2 className="page-title">Sign Up</h2>
         <label>
           Email:
           <input
-            type='email'
-            name='email'
+            type="email"
+            name="email"
             value={formData.email}
             onChange={handleChange}
           />
@@ -111,8 +110,8 @@ function SignUp() {
         <label>
           Password:
           <input
-            type='password'
-            name='password'
+            type="password"
+            name="password"
             value={formData.password}
             onChange={handleChange}
           />
@@ -121,8 +120,8 @@ function SignUp() {
         <label>
           Username:
           <input
-            type='text'
-            name='displayName'
+            type="text"
+            name="displayName"
             value={formData.displayName}
             onChange={handleChange}
           />
@@ -130,22 +129,22 @@ function SignUp() {
         <label>
           Profile thumbnail:
           <div className={`avatar-group ${avatarPreview ? "active" : ""}`}>
-            <span className='avatar-upload'>
-              <img src={AvatarIcon} alt='upload image' />
+            <span className="avatar-upload">
+              <img src={AvatarIcon} alt="upload image" />
               Choose image
             </span>
             {avatarPreview && (
-              <img src={avatarPreview} className='avatar-preview' />
+              <img src={avatarPreview} className="avatar-preview" />
             )}
           </div>
           <input
-            type='file'
-            name='avatar'
-            accept='image/*'
+            type="file"
+            name="avatar"
+            accept="image/*"
             onChange={handleAvatarChange}
           />
         </label>
-        <button className='btn' disabled={isPending}>
+        <button className="btn" disabled={isPending}>
           SIgn Up
         </button>
       </form>

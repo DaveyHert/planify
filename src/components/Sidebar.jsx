@@ -26,10 +26,12 @@ export default function Sidebar() {
 
   return (
     <>
-      <div
-        className={`sidebar-backdrop ${isOpen ? "open" : ""}`}
-        onClick={toggleSidebar}
-      />
+      {isOpen && (
+        <div
+          className={`sidebar-backdrop ${isOpen ? "open" : ""}`}
+          onClick={toggleSidebar}
+        />
+      )}
       <div className={`sidebar ${isOpen ? "open" : ""}`}>
         <button className="toggle-button" onClick={toggleSidebar}>
           {isOpen ? "x" : "☰"}

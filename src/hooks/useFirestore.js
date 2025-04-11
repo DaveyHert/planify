@@ -92,7 +92,6 @@ export function useFirestore(uid, sortBy) {
       await deleteDoc(docRef);
     } catch (err) {
       setError(err.message);
-      console.log(err);
     }
   };
 

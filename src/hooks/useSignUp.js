@@ -44,7 +44,6 @@ export function useSignUp() {
       setIsPending(false);
       setResponse(res);
     } catch (err) {
-      console.error("Signup error:", err); // ✅ Debugging
       setError(err.message);
       setIsPending(false);
     }

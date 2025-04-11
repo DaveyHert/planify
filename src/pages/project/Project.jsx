@@ -18,6 +18,7 @@ function Project() {
     return <div className="error">{error}</div>;
   }
 
+  // return project details
   return (
     <div className="project-details container">
       {project && (

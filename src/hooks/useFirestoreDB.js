@@ -27,13 +27,11 @@ export function useFirestoreDB(collectionName, uid) {
     const unsub = onSnapshot(
       colRef,
       (snapshot) => {
-        console.log(snapshot);
         setIsPending(false);
       },
 
       (err) => {
         setError(error);
-        console.log(err);
         setIsPending(false);
       }
     );
@@ -51,7 +49,6 @@ export function useFirestoreDB(collectionName, uid) {
     try {
       const docRef = doc(firestoreDB, collectionName, id);
       const docSnapshot = await getDoc(docRef);
-      console.log(docSnapshot);
     } catch (err) {
       setError(err.message);
     }
@@ -80,17 +77,14 @@ export function useFirestoreDB(collectionName, uid) {
     } catch (err) {
       setError(err.message);
       setIsPending(false);
-      console.log("Error:", err);
     }
 
     try {
       const docRef = doc(firestoreDB, collectionName, id);
       await deleteDoc(docRef);
-      console.log("Item deleted successfully");
       setIsPending(false);
     } catch (err) {
       setError(err.message);
-      console.log("Delete error: ", err);
       setIsPending(false);
     }
   };

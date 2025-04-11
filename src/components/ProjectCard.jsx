@@ -4,7 +4,6 @@ import Avatar from "./Avatar";
 
 // ProjectCard component
 function ProjectCard({ project }) {
-  console.log(project);
   return (
     <div className="project-card">
       <Link to={`/projects/${project.id}`} key={project.id}>

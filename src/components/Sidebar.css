@@ -1,6 +1,6 @@
 .sidebar {
-  min-width: 205px;
-  width: max(30%, 300px);
+  max-width: 300px;
+  width: max(20%, 300px);
   background: var(--primary-color);
   min-height: 100vh;
   box-sizing: border-box;
@@ -29,7 +29,7 @@
   display: none;
   position: absolute;
   right: -40px;
-  top: 10px;
+  top: 20px;
   z-index: 1001;
   width: 40px;
   height: 40px;
@@ -76,6 +76,7 @@
 
   .sidebar-backdrop {
     display: block;
+    opacity: 1;
   }
 
   .sidebar-backdrop.open {

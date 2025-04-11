@@ -21,7 +21,6 @@ export function useLogout() {
 
       // Logout
       await signOut(firebaseAuth);
-      console.log(user);
 
       // Update global auth context
       dispatch({ type: "LOG_OUT" });

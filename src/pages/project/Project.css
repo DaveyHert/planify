@@ -176,7 +176,7 @@
 }
 .project-comments textarea {
   min-height: 40px;
-  font-size: 1.5em;
+  font-size: 1em;
 }
 
 /* comment list */
@@ -185,7 +185,7 @@
   margin-top: 10px;
 }
 .project-comments li {
-  padding: 16px;
+  padding: 10px 15px;
   border-radius: 4px;
   border: 1px solid #f2f2f2;
   margin-top: 20px;
@@ -197,19 +197,32 @@
   align-items: center;
   color: var(--title-color);
 }
-.comment-author .avatar {
-  width: 30px;
-  height: 30px;
-  margin-right: 10px;
+.comment-author .avatar-wrapper {
+  width: 35px;
+  height: 35px;
+  margin-right: 5px;
 }
+
+.comment-author .avatar-wrapper::after {
+  display: none;
+}
+
+.comment-author-name {
+  font-size: 0.8em;
+  font-weight: 500;
+  margin-right: 10px;
+  color: var(--text-normal);
+}
+
 .comment-date {
   color: var(--text-color);
-  font-size: 0.9em;
-  margin: 4px 0 10px;
+  font-size: 0.7em;
+  display: inline-block;
 }
 .comment-content {
   color: var(--text-color);
-  font-size: 0.9em;
+  font-size: clamp(0.75rem, 2vw, 0.9rem);
+  margin-top: 5px;
 }
 
 @media (max-width: 1300px) {
@@ -228,4 +241,12 @@
     width: 95%;
     margin: 0 auto;
   } */
+}
+
+.add-comment .progress-icon {
+  width: 30px;
+  height: 30px;
+  animation: loading 0.6s linear infinite running;
+  position: relative;
+  transform: unset;
 }

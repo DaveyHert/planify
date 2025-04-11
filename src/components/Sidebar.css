@@ -9,8 +9,8 @@
   transition: all 0.3s ease;
 }
 .sidebar-content {
-  /* position: fixed; */
-
+  position: sticky;
+  top: 0;
   width: 100%;
 }
 .sidebar .user {

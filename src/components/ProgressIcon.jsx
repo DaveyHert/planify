@@ -1,8 +1,8 @@
-import styles from "./ProgressIcon.module.css";
 import ActivityIcon from "../assets/progress-activity.svg";
+import "./ProgressIcon.css";
 
 function ProgressIcon() {
-  return <img src={ActivityIcon} className={styles.icon}></img>;
+  return <img src={ActivityIcon} className="progress-icon"></img>;
 }
 
 export default ProgressIcon;

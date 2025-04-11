@@ -1,8 +1,8 @@
+import { useState, useEffect } from "react";
 import Avatar from "./Avatar";
 import NavLinks from "./NavLinks";
 import { useAuthContext } from "../hooks/useAuthContext";
 import "./Sidebar.css";
-import { useState } from "react";
 
 export default function Sidebar() {
   const { user } = useAuthContext();
@@ -12,12 +12,24 @@ export default function Sidebar() {
     setIsOpen(!isOpen);
   };
 
+  // auto close openned mobile sidebar on desktop/tablet
+  useEffect(() => {
+    const handleOpenSidebar = () => {
+      if (window.innerWidth > 768) {
+        setIsOpen(false);
+      }
+    };
+    window.addEventListener("resize", handleOpenSidebar);
+    // Cleanup on component unmount
+    return () => window.removeEventListener("resize", handleOpenSidebar);
+  }, []);
+
   return (
     <>
-      {/* <div
+      <div
         className={`sidebar-backdrop ${isOpen ? "open" : ""}`}
         onClick={toggleSidebar}
-      /> */}
+      />
       <div className={`sidebar ${isOpen ? "open" : ""}`}>
         <button className="toggle-button" onClick={toggleSidebar}>
           {isOpen ? "x" : "☰"}

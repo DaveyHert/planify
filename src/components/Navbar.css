@@ -62,6 +62,11 @@
   font-size: 1rem;
 }
 
+.navbar .mobile-logout {
+  display: none;
+}
+
+/* mobile responsiveness */
 @media screen and (max-width: 768px) {
   .navbar ul {
     justify-content: center;
@@ -76,6 +81,7 @@
     display: none;
   }
   .navbar .mobile-logout {
+    display: block;
     position: absolute;
     right: 10px;
     top: 50%;

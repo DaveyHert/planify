@@ -3,7 +3,6 @@ import React from "react";
 export const useTimeAgo = () => {
   const getTimeAgo = (timestamp) => {
     const now = new Date(); //get current date & time
-    console.log(typeof now);
     const date = timestamp.toDate(); //convert to js date object
 
     // Get past time in seconds
@@ -30,6 +29,8 @@ export const useTimeAgo = () => {
     if (diffInDays < 31) {
       return `${diffInDays < 2 ? "Yesterday" : diffInDays + " days ago"}`;
     }
+
+    // return actual date if past a month
     return date.toLocaleDateString(undefined, {
       year: "numeric",
       month: "short",

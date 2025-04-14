@@ -48,34 +48,31 @@ function ProjectComments({ project }) {
 
       <ul>
         {project.comments.length > 0 &&
-          project.comments.map((comment) => {
-            console.log(getTimeAgo(comment.createdAt));
-            return (
-              <li key={comment.id}>
-                <div className='comment-author'>
-                  <Avatar src={comment.photoURL} />
-                  <p className='comment-author-name'>{comment.displayName}</p>
-                  <span className='comment-date'>
-                    {getTimeAgo(comment.createdAt)}
-                  </span>
-                </div>
+          project.comments.map((comment) => (
+            <li key={comment.id}>
+              <div className='comment-author'>
+                <Avatar src={comment.photoURL} />
+                <p className='comment-author-name'>{comment.displayName}</p>
+                <span className='comment-date'>
+                  {getTimeAgo(comment.createdAt)}
+                </span>
+              </div>
 
-                <div className='comment-content'>
-                  <p>{comment.content}</p>
-                </div>
+              <div className='comment-content'>
+                <p>{comment.content}</p>
+              </div>
 
-                {user.uid === comment.createdBy && (
-                  <span
-                    className='delete-comment'
-                    title='remove'
-                    onClick={() => handleDeleteComment(comment.id)}
-                  >
-                    -
-                  </span>
-                )}
-              </li>
-            );
-          })}
+              {user.uid === comment.createdBy && (
+                <span
+                  className='delete-comment'
+                  title='remove'
+                  onClick={() => handleDeleteComment(comment.id)}
+                >
+                  -
+                </span>
+              )}
+            </li>
+          ))}
       </ul>
 
       <form className='add-comment' onSubmit={handleSubmit}>

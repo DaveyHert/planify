@@ -1,6 +1,13 @@
 import "./Dashboard.css";
 
-const filterList = ["all", "development", "design", "sales", "marketing"];
+const filterList = [
+  "all",
+  "mine",
+  "development",
+  "design",
+  "sales",
+  "marketing",
+];
 
 export const ProjectFilter = ({ currentFilter, changeFilter }) => {
   // handle filter update on click

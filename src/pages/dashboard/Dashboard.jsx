@@ -3,15 +3,22 @@ import { useCollection } from "../../hooks/useCollections";
 import ProgressIcon from "../../components/ProgressIcon";
 import ProjectList from "../../components/ProjectList";
 import { ProjectFilter } from "./ProjectFilter";
+import { useAuthContext } from "../../hooks/useAuthContext";
 import "./Dashboard.css";
 
 function Dashboard() {
   const { data: projects, error, isPending } = useCollection("projects");
+  const { user } = useAuthContext();
   const [currentFilter, setCurrentFilter] = useState("all");
 
   // return all by default or filter by project category based on current filter option.
   const filteredProjects = useMemo(() => {
+    console.log(user);
     if (currentFilter == "all") return projects;
+
+    if (currentFilter === "mine")
+      return projects.filter((project) => project.createdBy.id === user.uid);
+
     return projects.filter(
       (project) => project.category.toLowerCase() === currentFilter
     );

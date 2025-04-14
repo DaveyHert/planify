@@ -171,6 +171,12 @@
   margin-top: 20px;
 }
 
+.project-summary .status {
+  margin-top: 20px;
+  font-size: 0.8em;
+  color: var(--text-color);
+}
+
 /* project comments */
 .project-comments label {
   margin-bottom: 0px;

@@ -13,7 +13,6 @@ function Dashboard() {
 
   // return all by default or filter by project category based on current filter option.
   const filteredProjects = useMemo(() => {
-    console.log(user);
     if (currentFilter == "all") return projects;
 
     if (currentFilter === "mine")

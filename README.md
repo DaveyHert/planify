@@ -4,6 +4,8 @@ A modern project management application built with React and Firebase, designed 
 
 ![Planify Screenshot](public/planify-screenshot.png)
 
+[Live demo preview](https://planify-project-manageme-3db7b.web.app/dashboard)
+
 ## Features
 
 - 🔐 User Authentication

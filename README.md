@@ -10,9 +10,9 @@ A modern project management application built with React and Firebase, designed 
 
 - 🔐 User Authentication
 - 📋 Project Management
-- 📅 Task Tracking
+- 📅 Task Tracking (TBA)
 - 👥 Team Collaboration
-- 📊 Project Analytics
+- 📊 Project Analytics (TBA)
 - 🔔 Real-time Updates
 
 ## Tech Stack

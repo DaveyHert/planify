@@ -1,4 +1,4 @@
-import { Route, Navigate, Outlet } from "react-router-dom";
+import {  Navigate, Outlet } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 // wrapper to only allow signed in users access nested routes via outlet

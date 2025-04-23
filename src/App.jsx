@@ -2,15 +2,10 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { useAuthContext } from "./hooks/useAuthContext";
 import "./App.css";
 
-// import pages and components
-import ProtectedRoutes from "./pages/ProtectedRoutes";
-import PublicRoutes from "./pages/PublicRoutes";
-import Dashboard from "./pages/dashboard/Dashboard";
-import Project from "./pages/project/Project";
-import Create from "./pages/create/Create";
-import SignUp from "./pages/sign-up/SignUp";
-import Home from "./pages/Home/Home";
-import SignIn from "./pages/sign-in/SignIn";
+// import pages 
+import {ProtectedRoutes, PublicRoutes, Dashboard, SignUp, SignIn, Home, Project, Create} from "@/pages/index";
+
+// Import components
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import OnlineUsers from "./components/OnlineUsers";
